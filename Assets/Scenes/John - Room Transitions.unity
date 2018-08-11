@@ -256,10 +256,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7442866d27d6c6147b1ef0cb632922ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LinkedRoom: {fileID: 1929022324}
+  TransitionPointMode: 1
   TransitionBehavior: {fileID: 11400000, guid: 35df1ae0c73cb444b8565b2b67f8a52c, type: 2}
   Demo: 1
-  CanEnter: 1
+  PlayerCanUse: 1
+  LinkedRoom: {fileID: 1929022324}
+  CooldownTime: 1
 --- !u!1 &108829458
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,10 +502,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7442866d27d6c6147b1ef0cb632922ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LinkedRoom: {fileID: 1264891489}
+  TransitionPointMode: 0
   TransitionBehavior: {fileID: 11400000, guid: 35df1ae0c73cb444b8565b2b67f8a52c, type: 2}
   Demo: 0
-  CanEnter: 0
+  PlayerCanUse: 1
+  LinkedRoom: {fileID: 1264891489}
+  CooldownTime: 1
 --- !u!61 &1105982164
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -771,8 +775,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transitionState: 0
+  IsInitialisingRoom: 0
   _initialPlayer: {fileID: 0}
-  _isInitialisingRoom: 0
   _spawners: []
 --- !u!1 &1929022322
 GameObject:
@@ -817,6 +821,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transitionState: 0
+  IsInitialisingRoom: 0
   _initialPlayer: {fileID: 0}
-  _isInitialisingRoom: 0
   _spawners: []

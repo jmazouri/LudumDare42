@@ -47,15 +47,17 @@ public abstract class TransitionBehavior : ScriptableObject
             return;
         }
 
-        var targetPosition = ToRoom.TransitionPoints
-            .FirstOrDefault(d => d.LinkedRoom == FromRoom).transform.position;
+        var targetPoint = ToRoom.TransitionPoints.FirstOrDefault(d => d.LinkedRoom == FromRoom);
 
-        if (targetPosition == null)
+        if (targetPoint == null)
         {
             Debug.LogError($"Couldn't find a transition point in the linked room ({ToRoom.name}) that is linked to this room ({FromRoom.name}).", ToRoom.gameObject);
+            return;
         }
 
-        playerController.PlayerTransform.position = targetPosition;
+        targetPoint.CooldownTime = 1f;
+
+        playerController.PlayerTransform.position = targetPoint.transform.position;
         ToRoom.PlayerController = playerController;
     }
 
