@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace LD42.AI.Prototypes
 {
-    [RequireComponent(typeof(Rigidbody2D), typeof(CircleCollider2D))]
+    [RequireComponent(typeof(Rigidbody2D))]
     public class BasicEnemyBehaviour : MonoBehaviour
     {
         [SerializeField] private float _health;
@@ -36,6 +36,18 @@ namespace LD42.AI.Prototypes
             {
                 _attackBehaviour.StopAttack();
             }
+
+            var result = Physics2D.OverlapCircleAll(transform.position, 10);
+
+            foreach (var worldObject in result)
+            {
+                if (!worldObject.CompareTag("Player")) continue;
+                
+                _target = worldObject.GetComponent<IPlayerController>();
+                return;
+            }
+
+            _target = null;
         }
 
         protected virtual void HandleMove(GameObject playerObj)
@@ -49,20 +61,6 @@ namespace LD42.AI.Prototypes
                     _rb.AddForce(Vector2.right * _moveSpeed);
                 }
             
-        }
-
-        void OnTriggerEnter2D(Collider2D other)
-        {
-            if (!other.CompareTag("Player")) return;
-            
-            _target = other.GetComponent<IPlayerController>();
-        }
-
-        void OnTriggerExit2D(Collider2D other)
-        {
-            if (!other.CompareTag("Player")) return;
-            
-            _target = null;
         }
 
         public virtual void TakeDamage(float damage)
