@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using LD42.PlayerControllers;
 using UnityEngine;
 
 public enum TransitionState
@@ -12,21 +13,24 @@ public enum TransitionState
 
 public class Room : MonoBehaviour
 {
-    [SerializeField]
-    private TransitionState _transitionState;
+    [SerializeField] private TransitionState _transitionState;
+    
     public TransitionState TransitionState => _transitionState;
 
-    // Use this for initialization
-    void Start ()
+    [SerializeField] private GameObject _initialPlayer;
+    [SerializeField] private bool _isInitialisingRoom;
+
+    [SerializeField] private GameObject _entryPoint;
+
+    public IPlayerController PlayerController { get; set; }
+
+    void Start()
     {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		
-	}
+        if (!_isInitialisingRoom) return;
+
+        PlayerController = _initialPlayer.GetComponent<IPlayerController>();
+        Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, Camera.main.transform.position.z);
+    }
 
     private IEnumerator DoTransition(Room fromRoom, RoomTransitionPoint transitionPoint)
     {
@@ -34,7 +38,7 @@ public class Room : MonoBehaviour
         transitionPoint.NextRoom._transitionState = TransitionState.Entering;
 
         transitionPoint.TransitionBehavior.StartTransition(fromRoom, transitionPoint.NextRoom, transitionPoint);
-        
+
         while (!transitionPoint.TransitionBehavior.IsDone)
         {
             transitionPoint.TransitionBehavior.Tick();
@@ -50,5 +54,11 @@ public class Room : MonoBehaviour
     public void TriggerTransition(RoomTransitionPoint point)
     {
         StartCoroutine(DoTransition(this, point));
+    }
+
+    public void TeleportPlayer(IPlayerController playerController)
+    {
+        PlayerController = playerController;
+        PlayerController.PlayerTransform.position = _entryPoint.transform.position;
     }
 }

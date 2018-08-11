@@ -25,7 +25,9 @@ public abstract class TransitionBehavior : ScriptableObject
 
     public virtual void MoveCamera()
     {
-        Camera.main.transform.position = ToRoom.transform.position;
+        Camera.main.transform.position = new Vector3(ToRoom.transform.position.x, ToRoom.transform.position.y, Camera.main.transform.position.z);
+        ToRoom.TeleportPlayer(FromRoom.PlayerController);
+        FromRoom.PlayerController = null;
     }
 
     public virtual void EndTransition() { }
