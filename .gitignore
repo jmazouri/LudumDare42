@@ -57,3 +57,4 @@ sysinfo.txt
 **/.idea/**/contentModel.xml
 **/.idea/**/modules.xml
 .idea/
+Assets/Plugins/Editor/JetBrains/Unity3DRider.*
