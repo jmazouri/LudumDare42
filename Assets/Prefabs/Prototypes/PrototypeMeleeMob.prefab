@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 58919324654022108}
   - component: {fileID: 58072157642422724}
   - component: {fileID: 114242870027465934}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PrototypeMeleeMob
   m_TagString: Untagged
   m_Icon: {fileID: 0}
