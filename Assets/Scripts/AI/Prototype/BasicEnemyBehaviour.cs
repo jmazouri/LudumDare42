@@ -8,6 +8,7 @@ namespace LD42.AI.Prototypes
     [RequireComponent(typeof(Rigidbody2D), typeof(CircleCollider2D))]
     public class BasicEnemyBehaviour : MonoBehaviour
     {
+        [SerializeField] private float _health;
         [SerializeField] private float _attackRadius;
         [SerializeField] private float _moveSpeed;
         [SerializeField] private BaseAttackBehaviour _attackBehaviour;
@@ -20,7 +21,7 @@ namespace LD42.AI.Prototypes
             _rb = GetComponent<Rigidbody2D>();
         }
 
-        private void FixedUpdate()
+        void FixedUpdate()
         {
             if (_target != null && Vector3.Distance(transform.position, _target.PlayerTransform.position) > _attackRadius)
             {
@@ -37,7 +38,7 @@ namespace LD42.AI.Prototypes
             }
         }
 
-        private void HandleMove(GameObject playerObj)
+        protected virtual void HandleMove(GameObject playerObj)
         {
                 if (playerObj.transform.position.x < transform.position.x && _rb.velocity.x > - _moveSpeed)
                 {

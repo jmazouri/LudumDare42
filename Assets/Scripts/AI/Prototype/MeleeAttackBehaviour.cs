@@ -8,11 +8,6 @@ namespace LD42.AI.Prototypes
 {
     public class MeleeAttackBehaviour : BaseAttackBehaviour
     {
-        [SerializeField] private float _damage;
-        [SerializeField] private float _cooldownTime;
-        private IPlayerController _target;
-        private float _coolDownTimePassed;
-
         // Update is called once per frame
         void Update()
         {
