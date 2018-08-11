@@ -975,46 +975,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 50590953344915982, guid: e9a60dc1409643042a826dadd0f6b743,
-        type: 2}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114784946375732354, guid: e9a60dc1409643042a826dadd0f6b743,
-        type: 2}
-      propertyPath: _health
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 114784946375732354, guid: e9a60dc1409643042a826dadd0f6b743,
-        type: 2}
-      propertyPath: Speed
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 50590953344915982, guid: e9a60dc1409643042a826dadd0f6b743,
-        type: 2}
-      propertyPath: m_Mass
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 50590953344915982, guid: e9a60dc1409643042a826dadd0f6b743,
-        type: 2}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 50590953344915982, guid: e9a60dc1409643042a826dadd0f6b743,
-        type: 2}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 50590953344915982, guid: e9a60dc1409643042a826dadd0f6b743,
-        type: 2}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 61092322224609980, guid: e9a60dc1409643042a826dadd0f6b743,
-        type: 2}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9a60dc1409643042a826dadd0f6b743, type: 2}
   m_IsPrefabAsset: 0
