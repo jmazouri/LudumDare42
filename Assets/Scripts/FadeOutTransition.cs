@@ -15,6 +15,8 @@ public class FadeOutTransition : TransitionBehavior
 
     public override void StartTransition(Room fromRoom, Room toRoom, RoomTransitionPoint transitionPoint)
     {
+        IsDone = false;
+        _flip = false;
         base.StartTransition(fromRoom, toRoom, transitionPoint);
 
         _startColor = Camera.main.backgroundColor;

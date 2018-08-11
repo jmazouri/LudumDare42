@@ -18,6 +18,7 @@ public abstract class TransitionBehavior : ScriptableObject
 
     public virtual void StartTransition(Room fromRoom, Room toRoom, RoomTransitionPoint transitionPoint)
     {
+        IsDone = false;
         FromRoom = fromRoom;
         ToRoom = toRoom;
         TransitionPoint = transitionPoint;
