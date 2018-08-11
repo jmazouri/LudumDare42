@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using LD42.PlayerControllers;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public enum TransitionState
 {
@@ -17,18 +18,20 @@ public class Room : MonoBehaviour
     
     public TransitionState TransitionState => _transitionState;
 
+    public bool IsInitialisingRoom;
+
     [SerializeField] private GameObject _initialPlayer;
-    [SerializeField] private bool _isInitialisingRoom;
     [SerializeField] private EnemySpawnerBehaviour[] _spawners;
 
     public IPlayerController PlayerController { get; set; }
-    public IReadOnlyList<RoomTransitionPoint> TransitionPoints { get; private set; }
+
+    private RoomTransitionPoint[] _transitionPoints;
+    public IReadOnlyList<RoomTransitionPoint> TransitionPoints => 
+        _transitionPoints ?? (_transitionPoints = GetComponentsInChildren<RoomTransitionPoint>());
 
     void Start()
     {
-        TransitionPoints = GetComponentsInChildren<RoomTransitionPoint>();
-
-        if (!_isInitialisingRoom) return;
+        if (!IsInitialisingRoom) return;
 
         PlayerController = _initialPlayer.GetComponent<IPlayerController>();
         Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, Camera.main.transform.position.z);
