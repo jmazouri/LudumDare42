@@ -13,7 +13,7 @@ public enum TransitionState
 
 public class Room : MonoBehaviour
 {
-    [SerializeField] private TransitionState _transitionState;
+    [SerializeField] private TransitionState _transitionState = TransitionState.None;
     
     public TransitionState TransitionState => _transitionState;
 
