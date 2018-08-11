@@ -64,5 +64,13 @@ namespace LD42.AI.Prototypes
             
             _target = null;
         }
+
+        public virtual void TakeDamage(float damage)
+        {
+            _health -= damage;
+            if (!(_health <= 0)) return;
+            
+            Destroy(gameObject);
+        }
     }
 }
