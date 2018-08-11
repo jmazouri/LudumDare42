@@ -33,6 +33,11 @@ public class RoomTransitionPoint : MonoBehaviour
                 Debug.LogWarning("Linked room wasn't set for non-enterable point - probably fine, just FYI", gameObject);
             }
         }
+
+        if (PlayerCanUse && GetComponent<Collider2D>() == null)
+        {
+            Debug.LogWarning($"Transition point \"{name}\" was marked as player usable but has no Collider2D, so nothing will happen.", gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -41,7 +46,7 @@ public class RoomTransitionPoint : MonoBehaviour
 
         if (!PlayerCanUse)
         {
-            Debug.LogWarning("Player was denied entry to transtion point", gameObject);
+            Debug.LogWarning("Player was denied entry to transition point", gameObject);
             return;
         }
 
