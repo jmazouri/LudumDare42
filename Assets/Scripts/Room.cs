@@ -19,15 +19,15 @@ public class Room : MonoBehaviour
 
     [SerializeField] private GameObject _initialPlayer;
     [SerializeField] private bool _isInitialisingRoom;
-
-    [SerializeField] private GameObject _entryPoint;
-
     [SerializeField] private EnemySpawnerBehaviour[] _spawners;
 
     public IPlayerController PlayerController { get; set; }
+    public IReadOnlyList<RoomTransitionPoint> TransitionPoints { get; private set; }
 
     void Start()
     {
+        TransitionPoints = GetComponentsInChildren<RoomTransitionPoint>();
+
         if (!_isInitialisingRoom) return;
 
         PlayerController = _initialPlayer.GetComponent<IPlayerController>();
@@ -37,9 +37,9 @@ public class Room : MonoBehaviour
     private IEnumerator DoTransition(Room fromRoom, RoomTransitionPoint transitionPoint)
     {
         _transitionState = TransitionState.Exiting;
-        transitionPoint.NextRoom._transitionState = TransitionState.Entering;
+        transitionPoint.LinkedRoom._transitionState = TransitionState.Entering;
 
-        transitionPoint.TransitionBehavior.StartTransition(fromRoom, transitionPoint.NextRoom, transitionPoint);
+        transitionPoint.TransitionBehavior.StartTransition(fromRoom, transitionPoint.LinkedRoom, transitionPoint);
 
         while (!transitionPoint.TransitionBehavior.IsDone)
         {
@@ -50,24 +50,12 @@ public class Room : MonoBehaviour
         transitionPoint.TransitionBehavior.EndTransition();
 
         _transitionState = TransitionState.None;
-        transitionPoint.NextRoom._transitionState = TransitionState.Within;
+        transitionPoint.LinkedRoom._transitionState = TransitionState.Within;
     }
 
     public void TriggerTransition(RoomTransitionPoint point)
     {
         StartCoroutine(DoTransition(this, point));
-    }
-
-    public void TeleportPlayer(IPlayerController playerController)
-    {
-        if (playerController == null)
-        {
-            Debug.LogError("No IPlayerController is present in the scene, cannot transition");
-            return;
-        }
-
-        PlayerController = playerController;
-        PlayerController.PlayerTransform.position = _entryPoint.transform.position;
     }
 
     public void EnableSpawners()

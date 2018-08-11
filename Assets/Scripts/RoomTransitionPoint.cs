@@ -2,31 +2,49 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
 public class RoomTransitionPoint : MonoBehaviour
 {
-    public Room NextRoom;
+    public Room LinkedRoom;
+
     public TransitionBehavior TransitionBehavior;
-
     public bool Demo;
+    public bool PlayerCanUse = true;
 
-    private Room _thisRoom;
+    public Room ParentRoom { get; private set; }
 
     private void Start()
     {
-        _thisRoom = transform.GetComponentInParent<Room>();
+        ParentRoom = transform.GetComponentInParent<Room>();
 
         if (Demo)
         {
             //TODO: Remove this, only for demo purposes
-            _thisRoom.TriggerTransition(this);
+            ParentRoom.TriggerTransition(this);
+        }
+
+        if (LinkedRoom == null)
+        {
+            if (PlayerCanUse)
+            {
+                Debug.LogError($"Linked room wasn't set for point \"{name}\" in room \"{ParentRoom.name}\" - please link to another room", gameObject);
+            }
+            else
+            {
+                Debug.LogWarning("Linked room wasn't set for non-enterable point - probably fine, just FYI", gameObject);
+            }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Player")) return;
-        
-        _thisRoom.TriggerTransition(this);
+
+        if (!PlayerCanUse)
+        {
+            Debug.LogWarning("Player was denied entry to transtion point", gameObject);
+            return;
+        }
+
+        ParentRoom.TriggerTransition(this);
     }
 }
