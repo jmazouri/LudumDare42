@@ -7,13 +7,26 @@ public class PlayerController : MonoBehaviour, IPlayerController
     
     public float Speed;
     private Rigidbody2D body;
-    
-    public float Health { get; }
+    [SerializeField] private float _health;
+
+    public float Health
+    {
+        get { return _health; }
+        private set
+        {
+            _health = value;
+            if (_health <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
     public Transform PlayerTransform { get; private set; }
     
     public void TakeDamage(float damage)
     {
-        throw new System.NotImplementedException();
+        Health -= damage;
     }
 
     void Start()

@@ -22,6 +22,8 @@ public class Room : MonoBehaviour
 
     [SerializeField] private GameObject _entryPoint;
 
+    [SerializeField] private EnemySpawnerBehaviour[] _spawners;
+
     public IPlayerController PlayerController { get; set; }
 
     void Start()
@@ -60,5 +62,13 @@ public class Room : MonoBehaviour
     {
         PlayerController = playerController;
         PlayerController.PlayerTransform.position = _entryPoint.transform.position;
+    }
+
+    public void EnableSpawners()
+    {
+        foreach (var enemySpawnerBehaviour in _spawners)
+        {
+            enemySpawnerBehaviour.ShouldSpawn = true;
+        }
     }
 }

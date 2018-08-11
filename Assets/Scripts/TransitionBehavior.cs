@@ -28,6 +28,7 @@ public abstract class TransitionBehavior : ScriptableObject
     {
         Camera.main.transform.position = new Vector3(ToRoom.transform.position.x, ToRoom.transform.position.y, Camera.main.transform.position.z);
         ToRoom.TeleportPlayer(FromRoom.PlayerController);
+        ToRoom.EnableSpawners();
         FromRoom.PlayerController = null;
     }
 

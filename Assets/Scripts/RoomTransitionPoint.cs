@@ -25,6 +25,8 @@ public class RoomTransitionPoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!collision.CompareTag("Player")) return;
+        
         _thisRoom.TriggerTransition(this);
     }
 }
