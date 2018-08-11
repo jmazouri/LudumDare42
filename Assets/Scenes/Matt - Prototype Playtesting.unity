@@ -201,7 +201,7 @@ Prefab:
     - target: {fileID: 114973267112762446, guid: 06c4c03200f1ce44a939eb52d9503f5d,
         type: 2}
       propertyPath: _shrinkAmount
-      value: 1.2
+      value: 1.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06c4c03200f1ce44a939eb52d9503f5d, type: 2}
@@ -505,7 +505,7 @@ Prefab:
     - target: {fileID: 114973267112762446, guid: 06c4c03200f1ce44a939eb52d9503f5d,
         type: 2}
       propertyPath: _shrinkAmount
-      value: 1.6
+      value: 2.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06c4c03200f1ce44a939eb52d9503f5d, type: 2}
@@ -985,6 +985,16 @@ Prefab:
       propertyPath: _health
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 114784946375732354, guid: e9a60dc1409643042a826dadd0f6b743,
+        type: 2}
+      propertyPath: Speed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 50590953344915982, guid: e9a60dc1409643042a826dadd0f6b743,
+        type: 2}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9a60dc1409643042a826dadd0f6b743, type: 2}
   m_IsPrefabAsset: 0
@@ -1127,7 +1137,7 @@ Prefab:
     - target: {fileID: 114973267112762446, guid: 06c4c03200f1ce44a939eb52d9503f5d,
         type: 2}
       propertyPath: _shrinkAmount
-      value: 1.4
+      value: 1.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06c4c03200f1ce44a939eb52d9503f5d, type: 2}

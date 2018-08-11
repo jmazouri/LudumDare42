@@ -40,7 +40,7 @@ Transform:
   m_GameObject: {fileID: 1157045102702358}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.631, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 10
-  _attackRadius: 1.5
+  _attackRadius: 5
   _moveSpeed: 5
   _attackBehaviour: {fileID: 114943554802826088}
 --- !u!114 &114943554802826088
