@@ -60,6 +60,12 @@ public class Room : MonoBehaviour
 
     public void TeleportPlayer(IPlayerController playerController)
     {
+        if (playerController == null)
+        {
+            Debug.LogError("No IPlayerController is present in the scene, cannot transition");
+            return;
+        }
+
         PlayerController = playerController;
         PlayerController.PlayerTransform.position = _entryPoint.transform.position;
     }

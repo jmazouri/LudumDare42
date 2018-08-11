@@ -22,6 +22,8 @@ public abstract class TransitionBehavior : ScriptableObject
         FromRoom = fromRoom;
         ToRoom = toRoom;
         TransitionPoint = transitionPoint;
+
+        Time.timeScale = 0;
     }
 
     public virtual void MoveCamera()
@@ -32,11 +34,14 @@ public abstract class TransitionBehavior : ScriptableObject
         FromRoom.PlayerController = null;
     }
 
-    public virtual void EndTransition() { }
+    public virtual void EndTransition()
+    {
+        Time.timeScale = 1;
+    }
 
     public void Tick()
     {
-        InternalTick(Time.deltaTime * Speed);
+        InternalTick(Time.unscaledDeltaTime * Speed);
     }
 
     public abstract void InternalTick(float deltaTime);
