@@ -6,7 +6,7 @@ namespace LD42.Shrinking.Prototypes
 {
     public class Shrink : MonoBehaviour
     {
-        [SerializeField] private float _shrinkAmount;
+        [SerializeField] private float _shrinkAmount = 1f;
         private float _resultScaleX;
         private float _resultScaleY;
         
