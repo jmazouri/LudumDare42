@@ -347,9 +347,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FireRate: 0
   Damage: 10
-  ImmuneEntities:
+  ProjectileDistance: 100
+  AffectedEntities:
     serializedVersion: 2
-    m_Bits: 2147483648
+    m_Bits: 256
 --- !u!1 &826023255
 GameObject:
   m_ObjectHideFlags: 0
