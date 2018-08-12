@@ -143,6 +143,7 @@ public class RoomGenerator : MonoBehaviour
         var chosenEntrance = entrances[entranceIndex];
         chosenEntrance.LinkedRoom = source;
         chosenEntrance.PlayerCanUse = true;
+        chosenEntrance.EntryDialog = "What the FUCKing SHIT?!";
 
         _activeRoom = instance.GetComponent<Room>();
         _generatedRooms.Add(_activeRoom);
