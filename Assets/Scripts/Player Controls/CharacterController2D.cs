@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace Prime31
 {
 
-    [RequireComponent(typeof(BoxCollider2D), typeof(Rigidbody2D))]
+    [RequireComponent(typeof(CircleCollider2D), typeof(Rigidbody2D))]
     public class CharacterController2D : MonoBehaviour
     {
         #region internal types
@@ -140,7 +140,7 @@ namespace Prime31
         public new Transform transform;
         [HideInInspector]
         [NonSerialized]
-        public BoxCollider2D boxCollider;
+        public CircleCollider2D boxCollider;
         [HideInInspector]
         [NonSerialized]
         public Rigidbody2D rigidBody2D;
@@ -192,7 +192,7 @@ namespace Prime31
 
             // cache some components
             transform = GetComponent<Transform>();
-            boxCollider = GetComponent<BoxCollider2D>();
+            boxCollider = GetComponent<CircleCollider2D>();
             rigidBody2D = GetComponent<Rigidbody2D>();
 
             // here, we trigger our properties that have setters with bodies
@@ -210,22 +210,19 @@ namespace Prime31
 
         public void OnTriggerEnter2D(Collider2D col)
         {
-            if (onTriggerEnterEvent != null)
-                onTriggerEnterEvent(col);
+            onTriggerEnterEvent?.Invoke(col);
         }
 
 
         public void OnTriggerStay2D(Collider2D col)
         {
-            if (onTriggerStayEvent != null)
-                onTriggerStayEvent(col);
+            onTriggerStayEvent?.Invoke(col);
         }
 
 
         public void OnTriggerExit2D(Collider2D col)
         {
-            if (onTriggerExitEvent != null)
-                onTriggerExitEvent(col);
+            onTriggerExitEvent?.Invoke(col);
         }
 
         #endregion
@@ -318,11 +315,11 @@ namespace Prime31
         {
             // figure out the distance between our rays in both directions
             // horizontal
-            var colliderUseableHeight = boxCollider.size.y * Mathf.Abs(transform.localScale.y) - (2f * _skinWidth);
+            var colliderUseableHeight = boxCollider.radius * Mathf.Abs(transform.localScale.y) - (2f * _skinWidth);
             _verticalDistanceBetweenRays = colliderUseableHeight / (totalHorizontalRays - 1);
 
             // vertical
-            var colliderUseableWidth = boxCollider.size.x * Mathf.Abs(transform.localScale.x) - (2f * _skinWidth);
+            var colliderUseableWidth = boxCollider.radius * Mathf.Abs(transform.localScale.x) - (2f * _skinWidth);
             _horizontalDistanceBetweenRays = colliderUseableWidth / (totalVerticalRays - 1);
         }
 
