@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxRooms: 5
+  AmountToShrinkBy: 0.1
   StartingRoom: {fileID: 0}
   PreloadedPrefabs: []
 --- !u!1 &88227690
@@ -636,6 +637,21 @@ Prefab:
       propertyPath: m_isInputParsingRequired
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 224240836681079276, guid: 707686bfe13bff9469ea415e9710df27,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224240836681079276, guid: 707686bfe13bff9469ea415e9710df27,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -22.271
+      objectReference: {fileID: 0}
+    - target: {fileID: 224040728343399368, guid: 707686bfe13bff9469ea415e9710df27,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 29.699951
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 707686bfe13bff9469ea415e9710df27, type: 2}
   m_IsPrefabAsset: 0
@@ -811,7 +827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6204c960f3c3e4b489693e77447a0559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shrinkAmount: 3
+  ShrinkAmount: 1
 --- !u!1 &1900547549
 GameObject:
   m_ObjectHideFlags: 0

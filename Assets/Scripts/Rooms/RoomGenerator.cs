@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using LD42.Shrinking.Prototypes;
 using UnityEngine;
 
 public class RoomGenerator : MonoBehaviour
 {
     public int MaxRooms = 10;
+
+    public float AmountToShrinkBy;
 
     public Room StartingRoom;
     public Room[] PreloadedPrefabs;
@@ -13,6 +16,7 @@ public class RoomGenerator : MonoBehaviour
     private List<Room> _roomPrefabs = new List<Room>();
     private List<Room> _generatedRooms = new List<Room>();
     private Room _activeRoom;
+    private float _initialShrinkAmount = 1f;
 
 	// Use this for initialization
 	void Start ()
@@ -44,6 +48,7 @@ public class RoomGenerator : MonoBehaviour
 
         _activeRoom = StartingRoom;
         InitialGeneration();
+        ShrinkRooms();
 	}
 
     private void InitialGeneration()
@@ -81,6 +86,17 @@ public class RoomGenerator : MonoBehaviour
     private GameObject GetNextPrefab()
     {
         return _roomPrefabs[Random.Range(0, _roomPrefabs.Count)].gameObject;
+    }
+
+    private void ShrinkRooms()
+    {
+        foreach (var room in _generatedRooms)
+        {
+            _initialShrinkAmount += AmountToShrinkBy;
+            var shrinkComponent = room.GetComponent<Shrink>();
+            shrinkComponent.ShrinkAmount += _initialShrinkAmount;
+            shrinkComponent.ShrinkItem();
+        }
     }
 
     public Room GenerateNext(Room source)
