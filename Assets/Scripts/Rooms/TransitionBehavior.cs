@@ -71,6 +71,7 @@ public abstract class TransitionBehavior : ScriptableObject
         //playerController.Controller.velocity = new Vector2();
         playerController.Controller.move(new Vector3());
         playerController.PlayerVelocity = new Vector3();
+        Input.ResetInputAxes();
 
         ToRoom.PlayerController = playerController;
     }
