@@ -478,7 +478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TransitionPointMode: 1
-  TransitionBehavior: {fileID: 11400000, guid: 35df1ae0c73cb444b8565b2b67f8a52c, type: 2}
+  TransitionBehavior: {fileID: 11400000, guid: 6274dff7387f5bf41b4ecd799413b2e5, type: 2}
   Demo: 0
   PlayerCanUse: 1
   LinkedRoom: {fileID: 0}
@@ -606,35 +606,35 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114186187353025644, guid: 707686bfe13bff9469ea415e9710df27,
-        type: 2}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114186187353025644, guid: 707686bfe13bff9469ea415e9710df27,
-        type: 2}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114255686467860990, guid: 707686bfe13bff9469ea415e9710df27,
-        type: 2}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114255686467860990, guid: 707686bfe13bff9469ea415e9710df27,
-        type: 2}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 114457175782921264, guid: 707686bfe13bff9469ea415e9710df27,
         type: 2}
       propertyPath: m_havePropertiesChanged
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114457175782921264, guid: 707686bfe13bff9469ea415e9710df27,
         type: 2}
       propertyPath: m_isInputParsingRequired
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114186187353025644, guid: 707686bfe13bff9469ea415e9710df27,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114186187353025644, guid: 707686bfe13bff9469ea415e9710df27,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114255686467860990, guid: 707686bfe13bff9469ea415e9710df27,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114255686467860990, guid: 707686bfe13bff9469ea415e9710df27,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 707686bfe13bff9469ea415e9710df27, type: 2}

@@ -17,6 +17,8 @@ public abstract class TransitionBehavior : ScriptableObject
     public Room ToRoom;
     [NonSerialized]
     public RoomTransitionPoint TransitionPoint;
+    [NonSerialized]
+    private bool _startTransition;
 
     public virtual void StartTransition(Room fromRoom, Room toRoom, RoomTransitionPoint transitionPoint)
     {
@@ -25,7 +27,14 @@ public abstract class TransitionBehavior : ScriptableObject
         ToRoom = toRoom;
         TransitionPoint = transitionPoint;
 
-        Time.timeScale = 0;
+        LeanTween.value(FromRoom.gameObject, update =>
+        {
+            Time.timeScale = update;
+            Time.fixedDeltaTime = update * 0.02f;
+        }, 1, 0, 0.5f)
+        .setEase(LeanTweenType.easeOutExpo)
+        .setIgnoreTimeScale(true)
+        .setOnComplete(() => _startTransition = true);
     }
 
     public virtual void MoveCamera()
@@ -66,11 +75,16 @@ public abstract class TransitionBehavior : ScriptableObject
     public virtual void EndTransition()
     {
         Time.timeScale = 1;
+        Time.fixedDeltaTime = 0.02f;
+        _startTransition = false;
     }
 
     public void Tick()
     {
-        InternalTick(Time.unscaledDeltaTime * Speed);
+        if (_startTransition)
+        {
+            InternalTick(Time.unscaledDeltaTime * Speed);
+        }
     }
 
     public abstract void InternalTick(float deltaTime);

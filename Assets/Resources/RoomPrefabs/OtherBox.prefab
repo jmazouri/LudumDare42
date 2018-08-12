@@ -531,7 +531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TransitionPointMode: 1
-  TransitionBehavior: {fileID: 11400000, guid: 35df1ae0c73cb444b8565b2b67f8a52c, type: 2}
+  TransitionBehavior: {fileID: 11400000, guid: 6274dff7387f5bf41b4ecd799413b2e5, type: 2}
   Demo: 0
   PlayerCanUse: 1
   LinkedRoom: {fileID: 0}
@@ -548,7 +548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TransitionPointMode: 1
-  TransitionBehavior: {fileID: 11400000, guid: 35df1ae0c73cb444b8565b2b67f8a52c, type: 2}
+  TransitionBehavior: {fileID: 11400000, guid: 6274dff7387f5bf41b4ecd799413b2e5, type: 2}
   Demo: 0
   PlayerCanUse: 1
   LinkedRoom: {fileID: 0}
@@ -565,7 +565,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TransitionPointMode: 0
-  TransitionBehavior: {fileID: 11400000, guid: 35df1ae0c73cb444b8565b2b67f8a52c, type: 2}
+  TransitionBehavior: {fileID: 11400000, guid: 6274dff7387f5bf41b4ecd799413b2e5, type: 2}
   Demo: 0
   PlayerCanUse: 0
   LinkedRoom: {fileID: 0}
