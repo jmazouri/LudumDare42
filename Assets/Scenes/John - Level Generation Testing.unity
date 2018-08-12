@@ -642,6 +642,14 @@ Prefab:
       propertyPath: _demo
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1379756592310722, guid: 707686bfe13bff9469ea415e9710df27, type: 2}
+      propertyPath: m_Name
+      value: HealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343731202275042, guid: 707686bfe13bff9469ea415e9710df27, type: 2}
+      propertyPath: m_Name
+      value: AmmoBar
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 707686bfe13bff9469ea415e9710df27, type: 2}
   m_IsPrefabAsset: 0

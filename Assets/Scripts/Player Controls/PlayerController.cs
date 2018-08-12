@@ -1,14 +1,21 @@
 ﻿using UnityEngine;
 using LD42.PlayerControllers;
 using Prime31;
+using UnityEngine.UI;
 
 public class PlayerController : CharacterController2D, IPlayerController
 {
     private CharacterController2D _controller;
 
     [SerializeField] private float _health;
+    [SerializeField] private float _initialAmmo;
 
     private Vector3 _velocity;
+    private float _ammo;
+    private GameObject _healthBar;
+    private GameObject _ammoBar;
+    private Slider _ammoBarSlider;
+    private Slider _healthBarSlider;
 
     // Movement Config
     [SerializeField] [Range(-25, 25)] private float _gravity = -25f;
@@ -30,6 +37,15 @@ public class PlayerController : CharacterController2D, IPlayerController
         }
     }
 
+    public float Ammo
+    {
+        get { return _ammo; }
+        private set
+        {
+            _ammo = value;
+        }
+    }
+
     public Transform PlayerTransform { get; private set; }
     public Rigidbody2D PlayerRigidbody { get; private set; }
     public float MaxVelocityChange { get; set; } = 10.0f;
@@ -41,6 +57,15 @@ public class PlayerController : CharacterController2D, IPlayerController
 
     void Start()
     {
+        _healthBar = GameObject.Find("HealthBar");
+        _ammoBar = GameObject.Find("AmmoBar");
+
+        _healthBarSlider = _healthBar.GetComponent<Slider>();
+        _ammoBarSlider = _ammoBar.GetComponent<Slider>();
+
+        _healthBarSlider.value = _health;
+        _ammoBarSlider.value = _initialAmmo;
+        
         _controller = GetComponent<CharacterController2D>();
         PlayerTransform = transform;
         PlayerRigidbody = GetComponent<Rigidbody2D>();
@@ -48,6 +73,8 @@ public class PlayerController : CharacterController2D, IPlayerController
         _controller.onControllerCollidedEvent += OnControllerCollider;
         _controller.onTriggerEnterEvent += OnTriggerEnterEvent;
         _controller.onTriggerExitEvent += OnTriggerExitEvent;
+        
+        Ammo = _initialAmmo;
     }
 
     private void OnControllerCollider(RaycastHit2D hit)
