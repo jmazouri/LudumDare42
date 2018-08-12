@@ -56,6 +56,7 @@ public class RoomGenerator : MonoBehaviour
         while (_generatedRooms.Count < MaxRooms)
         {
             var exits = _activeRoom.TransitionPoints.Where(d => d.IsViableExit).ToArray();
+            
 
             if (exits.Length == 0)
             {

@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 4746656751359338}
   - component: {fileID: 61634795403988330}
   - component: {fileID: 114003809947389108}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Exit Point (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 4964006800700606}
   - component: {fileID: 61468134720953284}
   - component: {fileID: 114963994219990974}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Entrance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 4923984993248058}
   - component: {fileID: 61717070620885574}
   - component: {fileID: 114120753383637178}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Exit Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}

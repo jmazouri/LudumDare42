@@ -18,12 +18,12 @@ MonoBehaviour:
   m_fontInfo:
     Name: FFF Forward
     PointSize: 48
-    Scale: 0
+    Scale: 1
     CharacterCount: 95
     LineHeight: 66
     Baseline: 0
     Ascender: 54
-    CapHeight: 0
+    CapHeight: 60
     Descender: -12
     CenterLine: 0
     SuperscriptOffset: 54
@@ -33,7 +33,7 @@ MonoBehaviour:
     UnderlineThickness: 0.96000004
     strikethrough: 15.272727
     strikethroughThickness: 0.96000004
-    TabWidth: 0
+    TabWidth: 180
     Padding: 5
     AtlasWidth: 512
     AtlasHeight: 512
@@ -42,10 +42,10 @@ MonoBehaviour:
   - id: 32
     x: 5
     y: 507
-    width: 0
-    height: 0
+    width: 18
+    height: 66
     xOffset: 0
-    yOffset: 0
+    yOffset: 54
     xAdvance: 18
     scale: 1
   - id: 33

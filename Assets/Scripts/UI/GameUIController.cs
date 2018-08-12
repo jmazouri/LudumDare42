@@ -84,13 +84,13 @@ public class GameUIController : MonoBehaviour
         {
             _readingTimePassed += Time.deltaTime;
         }
-        else if (_characterCount < _dialogues[0].Length && _characterPrintingTimePassed >= _timeBetweenCharacters)
+        else if (_dialogues.Count > 0 && _characterCount < _dialogues[0].Length && _characterPrintingTimePassed >= _timeBetweenCharacters)
         {
             _dialogueTextBox.text += _dialogues[0][_characterCount];
             _characterCount++;
             _characterPrintingTimePassed = 0;
         }
-        else if (_characterCount >= _dialogues[0].Length)
+        else if (_dialogues.Count > 0 && _characterCount >= _dialogues[0].Length)
         {
             _isPrinting = false;
             var text = _dialogues[0];

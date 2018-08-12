@@ -155,7 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxRooms: 5
   AmountToShrinkBy: 0.1
-  StartingRoom: {fileID: 0}
+  StartingRoom: {fileID: 1711195486}
   PreloadedPrefabs: []
 --- !u!1 &88227690
 GameObject:
@@ -445,7 +445,7 @@ GameObject:
   - component: {fileID: 1039944544}
   - component: {fileID: 1039944546}
   - component: {fileID: 1039944545}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Exit Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
