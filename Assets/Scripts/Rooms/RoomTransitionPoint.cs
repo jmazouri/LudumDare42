@@ -27,6 +27,9 @@ public class RoomTransitionPoint : MonoBehaviour
     public bool IsViableEntrance => TransitionPointMode == TransitionPointMode.Entrance;
     public bool IsViableExit => TransitionPointMode == TransitionPointMode.Exit;
 
+    public bool WasDialogActivated { get; set; } = false;
+    public string EntryDialog { get; set; } = null;
+
     private void Start()
     {
         _collider = GetComponent<Collider2D>();

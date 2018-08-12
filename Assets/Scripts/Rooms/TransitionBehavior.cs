@@ -22,6 +22,11 @@ public abstract class TransitionBehavior : ScriptableObject
     [NonSerialized]
     private bool _startTransition;
 
+    public GameUIController UIController => FindObjectOfType<GameUIController>();
+
+    public RoomTransitionPoint TargetTransitionPoint => 
+        ToRoom.TransitionPoints.FirstOrDefault(d => d.LinkedRoom == FromRoom);
+
     public virtual void StartTransition(Room fromRoom, Room toRoom, RoomTransitionPoint transitionPoint)
     {
         IsDone = false;
@@ -58,17 +63,15 @@ public abstract class TransitionBehavior : ScriptableObject
             return;
         }
 
-        var targetPoint = ToRoom.TransitionPoints.FirstOrDefault(d => d.LinkedRoom == FromRoom);
-
-        if (targetPoint == null)
+        if (TargetTransitionPoint == null)
         {
             Debug.LogError($"Couldn't find a transition point in the linked room ({ToRoom.name}) that is linked to this room ({FromRoom.name}).", ToRoom.gameObject);
             return;
         }
 
-        targetPoint.CooldownTime = 1f;
+        TargetTransitionPoint.CooldownTime = 2.5f;
 
-        playerController.PlayerTransform.position = targetPoint.transform.position;
+        playerController.PlayerTransform.position = TargetTransitionPoint.transform.position;
         playerController.ClearVelocityAndInput();
 
         ToRoom.PlayerController = playerController;
@@ -79,6 +82,12 @@ public abstract class TransitionBehavior : ScriptableObject
         Time.timeScale = 1;
         Time.fixedDeltaTime = 0.02f;
         _startTransition = false;
+
+        if (TargetTransitionPoint.EntryDialog != null && !TargetTransitionPoint.WasDialogActivated)
+        {
+            TargetTransitionPoint.WasDialogActivated = true;
+            UIController.QueueNewDialogueText(TargetTransitionPoint.EntryDialog);
+        }
     }
 
     public void Tick()
