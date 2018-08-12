@@ -692,7 +692,7 @@ GameObject:
   - component: {fileID: 1289233268}
   - component: {fileID: 1289233270}
   - component: {fileID: 1289233269}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Exit Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -873,6 +873,22 @@ Prefab:
         type: 2}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1895349865728750, guid: 06c4c03200f1ce44a939eb52d9503f5d, type: 2}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1835278478894384, guid: 06c4c03200f1ce44a939eb52d9503f5d, type: 2}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1365572882136306, guid: 06c4c03200f1ce44a939eb52d9503f5d, type: 2}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1312672920198264, guid: 06c4c03200f1ce44a939eb52d9503f5d, type: 2}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06c4c03200f1ce44a939eb52d9503f5d, type: 2}
@@ -1064,6 +1080,41 @@ Prefab:
     - target: {fileID: 4337231607122354, guid: e9a60dc1409643042a826dadd0f6b743, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114784946375732354, guid: e9a60dc1409643042a826dadd0f6b743,
+        type: 2}
+      propertyPath: _jumpHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114784946375732354, guid: e9a60dc1409643042a826dadd0f6b743,
+        type: 2}
+      propertyPath: Speed
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114784946375732354, guid: e9a60dc1409643042a826dadd0f6b743,
+        type: 2}
+      propertyPath: platformMask.m_Bits
+      value: 32768
+      objectReference: {fileID: 0}
+    - target: {fileID: 114784946375732354, guid: e9a60dc1409643042a826dadd0f6b743,
+        type: 2}
+      propertyPath: triggerMask.m_Bits
+      value: 131072
+      objectReference: {fileID: 0}
+    - target: {fileID: 114784946375732354, guid: e9a60dc1409643042a826dadd0f6b743,
+        type: 2}
+      propertyPath: oneWayPlatformMask.m_Bits
+      value: 65536
+      objectReference: {fileID: 0}
+    - target: {fileID: 50590953344915982, guid: e9a60dc1409643042a826dadd0f6b743,
+        type: 2}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114784946375732354, guid: e9a60dc1409643042a826dadd0f6b743,
+        type: 2}
+      propertyPath: _gravity
+      value: 0.84
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9a60dc1409643042a826dadd0f6b743, type: 2}
