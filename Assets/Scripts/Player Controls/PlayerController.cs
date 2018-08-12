@@ -88,4 +88,11 @@ public class PlayerController : CharacterController2D, IPlayerController
 
         _velocity = _controller.velocity;
     }
+
+    public void ClearVelocityAndInput()
+    {
+        _controller.move(new Vector3());
+        _velocity = new Vector3();
+        Input.ResetInputAxes();
+    }
 }
