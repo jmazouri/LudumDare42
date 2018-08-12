@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7078c0b73183b224ea8a1cd2bbe3787c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxRooms: 10
+  MaxRooms: 25
   AmountToShrinkBy: 0.1
   StartingRoom: {fileID: 1711195486}
   PreloadedPrefabs: []
@@ -282,6 +282,34 @@ Transform:
   m_Father: {fileID: 1711195485}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &567901971
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 567901972}
+  m_Layer: 0
+  m_Name: Laser
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &567901972
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 567901971}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2.1891398, y: 2.50696, z: 1}
+  m_Children: []
+  m_Father: {fileID: 593049602}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &593049595
 Prefab:
   m_ObjectHideFlags: 0
@@ -327,6 +355,28 @@ Prefab:
 --- !u!1 &593049596 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1702082534535142, guid: e9a60dc1409643042a826dadd0f6b743,
+    type: 2}
+  m_PrefabInternal: {fileID: 593049595}
+--- !u!114 &593049597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 593049596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e26fd2c8f12d08a4b8ccb21fb5dffa5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FireRate: 0
+  Damage: 10
+  ProjectileDistance: 100
+  AffectedEntities:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!4 &593049602 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4337231607122354, guid: e9a60dc1409643042a826dadd0f6b743,
     type: 2}
   m_PrefabInternal: {fileID: 593049595}
 --- !u!1 &733530831

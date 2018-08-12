@@ -18,6 +18,8 @@ public class RoomGenerator : MonoBehaviour
     private Room _activeRoom;
     private float _initialShrinkAmount = 1f;
 
+    private WeightedRandomizer<Room> _weights = new WeightedRandomizer<Room>();
+
 	// Use this for initialization
 	void Start ()
     {
@@ -48,13 +50,17 @@ public class RoomGenerator : MonoBehaviour
 
         _activeRoom = StartingRoom;
         InitialGeneration();
-
 	}
 
     int depth = 0;
 
     private void InitialGeneration()
     {
+        foreach (var prefab in _roomPrefabs)
+        {
+            _weights.Weights.Add(prefab, Mathf.RoundToInt((1f / _roomPrefabs.Count) * 100));
+        }
+
         while (_generatedRooms.Count < MaxRooms)
         {
             var exits = _activeRoom.TransitionPoints.Where(d => d.IsViableExit).ToArray();
@@ -90,7 +96,10 @@ public class RoomGenerator : MonoBehaviour
 	
     private GameObject GetNextPrefab()
     {
-        return _roomPrefabs[Random.Range(0, _roomPrefabs.Count)].gameObject;
+        var picked = _weights.TakeOne();
+        _weights.Weights[picked] = Mathf.RoundToInt(_weights.Weights[picked] * 0.8f);
+
+        return picked.gameObject;
     }
 
     private void ShrinkRooms()
@@ -107,6 +116,7 @@ public class RoomGenerator : MonoBehaviour
     public Room GenerateNext(Room source)
     {
         var prefab = GetNextPrefab();
+
         var instance = Instantiate(prefab, transform, false);
         var roomInstance = instance.GetComponent<Room>();
 
