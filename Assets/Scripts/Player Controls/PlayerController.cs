@@ -4,16 +4,11 @@ using Prime31;
 
 public class PlayerController : CharacterController2D, IPlayerController
 {
-    public CharacterController2D Controller { get; private set; }
+    private CharacterController2D _controller;
 
     [SerializeField] private float _health;
 
     private Vector3 _velocity;
-    public Vector3 PlayerVelocity
-    {
-        get { return _velocity; }
-        set { _velocity = value; }
-    }
 
     // Movement Config
     [SerializeField] [Range(-25, 25)] private float _gravity = -25f;
@@ -46,13 +41,13 @@ public class PlayerController : CharacterController2D, IPlayerController
 
     void Start()
     {
-        Controller = GetComponent<CharacterController2D>();
+        _controller = GetComponent<CharacterController2D>();
         PlayerTransform = transform;
         PlayerRigidbody = GetComponent<Rigidbody2D>();
 
-        Controller.onControllerCollidedEvent += OnControllerCollider;
-        Controller.onTriggerEnterEvent += OnTriggerEnterEvent;
-        Controller.onTriggerExitEvent += OnTriggerExitEvent;
+        _controller.onControllerCollidedEvent += OnControllerCollider;
+        _controller.onTriggerEnterEvent += OnTriggerEnterEvent;
+        _controller.onTriggerExitEvent += OnTriggerExitEvent;
     }
 
     private void OnControllerCollider(RaycastHit2D hit)
@@ -73,24 +68,31 @@ public class PlayerController : CharacterController2D, IPlayerController
 
     void Update()
     {
-        if (Controller.isGrounded)
+        if (_controller.isGrounded)
         {
             _velocity.y = 0;
         }
 
         // Only jump when allowed to
-        if (Controller.isGrounded && Input.GetButton("Jump"))
+        if (_controller.isGrounded && Input.GetButton("Jump"))
         {
             _velocity.y = Mathf.Sqrt(2f * _jumpHeight * -_gravity);
         }
 
-        var smoothMovementFactor = Controller.isGrounded ? _groundDamping : _inAirDamping;
-        _velocity.x = Mathf.Lerp(PlayerVelocity.x, Input.GetAxis("Horizontal") * _speed, Time.deltaTime * smoothMovementFactor);
+        var smoothMovementFactor = _controller.isGrounded ? _groundDamping : _inAirDamping;
+        _velocity.x = Mathf.Lerp(_velocity.x, Input.GetAxis("Horizontal") * _speed, Time.deltaTime * smoothMovementFactor);
 
         _velocity.y += _gravity * Time.deltaTime;
 
-        Controller.move(PlayerVelocity * Time.deltaTime);
+        _controller.move(_velocity * Time.deltaTime);
 
-        _velocity = Controller.velocity;
+        _velocity = _controller.velocity;
+    }
+
+    public void ClearVelocityAndInput()
+    {
+        _controller.move(new Vector3());
+        _velocity = new Vector3();
+        Input.ResetInputAxes();
     }
 }

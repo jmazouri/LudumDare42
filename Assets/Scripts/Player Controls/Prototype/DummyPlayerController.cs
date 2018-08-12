@@ -21,8 +21,12 @@ namespace LD42.PlayerControllers.Prototypes
         }
 
         public Transform PlayerTransform => transform;
-        public CharacterController2D Controller { get; set; }
-        public Vector3 PlayerVelocity { get; set; }
+
+        public void ClearVelocityAndInput()
+        {
+        }
+
+
         public void TakeDamage(float damage)
         {
             Health -= damage;

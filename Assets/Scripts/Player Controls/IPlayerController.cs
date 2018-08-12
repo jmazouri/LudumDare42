@@ -9,8 +9,7 @@ namespace LD42.PlayerControllers
     {
         float Health { get; }
         Transform PlayerTransform { get; }
-        CharacterController2D Controller { get; }
-        Vector3 PlayerVelocity { get; set; }
+        void ClearVelocityAndInput();
         void TakeDamage(float damage);
     }
 }
