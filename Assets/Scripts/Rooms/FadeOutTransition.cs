@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(menuName = "Transitions/Fade Out")]
 public class FadeOutTransition : TransitionBehavior
@@ -9,17 +10,17 @@ public class FadeOutTransition : TransitionBehavior
     [NonSerialized]
     private float _fadeAmount = 0;
     [NonSerialized]
-    private Color _startColor;
-    [NonSerialized]
     private bool _flip = false;
+    [NonSerialized]
+    public Image _fadeTarget;
 
     public override void StartTransition(Room fromRoom, Room toRoom, RoomTransitionPoint transitionPoint)
     {
         IsDone = false;
         _flip = false;
-        base.StartTransition(fromRoom, toRoom, transitionPoint);
+        _fadeTarget = GameObject.Find("FadeTarget").GetComponent<Image>();
 
-        _startColor = Camera.main.backgroundColor;
+        base.StartTransition(fromRoom, toRoom, transitionPoint);
     }
 
     public override void InternalTick(float deltaTime)
@@ -46,7 +47,7 @@ public class FadeOutTransition : TransitionBehavior
             return;
         }
 
-        //TODO: Actually make this fade
-        Camera.main.backgroundColor = Color.Lerp(_startColor, Color.black, _fadeAmount);
+        float tweenedFade = LeanTween.easeInOutQuart(0, 1, _fadeAmount);
+        _fadeTarget.color = Color.Lerp(new Color(), Color.black, tweenedFade);
     }
 }

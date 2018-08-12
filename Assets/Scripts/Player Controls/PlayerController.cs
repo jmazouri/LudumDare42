@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
     }
 
     public Transform PlayerTransform { get; private set; }
+    public Rigidbody2D PlayerRigidbody { get; private set; }
 
     public void TakeDamage(float damage)
     {
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
     {
         body = GetComponent<Rigidbody2D>();
         PlayerTransform = transform;
+        PlayerRigidbody = GetComponent<Rigidbody2D>();
     }
 
     void Update()

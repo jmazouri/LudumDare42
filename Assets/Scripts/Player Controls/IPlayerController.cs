@@ -8,6 +8,7 @@ namespace LD42.PlayerControllers
     {
         float Health { get; }
         Transform PlayerTransform { get; }
+        Rigidbody2D PlayerRigidbody { get; }
         void TakeDamage(float damage);
     }
 }
