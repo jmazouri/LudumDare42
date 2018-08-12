@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 864842642c811c64bb5c6ba6dcf66f97, type: 3}
   m_Name: DefaultSlideImage
   m_EditorClassIdentifier: 
-  Speed: 0.3
+  Speed: 0.5
   Curve:
     serializedVersion: 2
     m_Curve:
