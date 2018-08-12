@@ -66,7 +66,7 @@ public class PlayerController : CharacterController2D, IPlayerController
         Debug.Log("onTriggerExitEvent: " + col.gameObject.name);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (_controller.isGrounded)
         {
