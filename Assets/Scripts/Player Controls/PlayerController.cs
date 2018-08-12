@@ -54,7 +54,7 @@ public class PlayerController : CharacterController2D, IPlayerController
 
     void Start()
     {
-        _uiController = GameObject.Find("GameHUD").GetComponent<GameUIController>();
+        //_uiController = GameObject.Find("GameHUD").GetComponent<GameUIController>();
         
         _controller = GetComponent<CharacterController2D>();
         PlayerTransform = transform;
