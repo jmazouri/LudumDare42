@@ -68,7 +68,9 @@ public abstract class TransitionBehavior : ScriptableObject
         targetPoint.CooldownTime = 1f;
 
         playerController.PlayerTransform.position = targetPoint.transform.position;
-        playerController.PlayerRigidbody.velocity = new Vector2();
+        //playerController.Controller.velocity = new Vector2();
+        playerController.Controller.move(new Vector3());
+        playerController.PlayerVelocity = new Vector3();
 
         ToRoom.PlayerController = playerController;
     }

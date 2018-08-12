@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Prime31;
 using UnityEngine;
 
 namespace LD42.PlayerControllers.Prototypes
@@ -20,8 +21,8 @@ namespace LD42.PlayerControllers.Prototypes
         }
 
         public Transform PlayerTransform => transform;
-        public Rigidbody2D PlayerRigidbody => GetComponent<Rigidbody2D>();
-
+        public CharacterController2D Controller { get; set; }
+        public Vector3 PlayerVelocity { get; set; }
         public void TakeDamage(float damage)
         {
             Health -= damage;

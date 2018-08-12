@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Prime31;
 using UnityEngine;
 
 namespace LD42.PlayerControllers
@@ -8,7 +9,8 @@ namespace LD42.PlayerControllers
     {
         float Health { get; }
         Transform PlayerTransform { get; }
-        Rigidbody2D PlayerRigidbody { get; }
+        CharacterController2D Controller { get; }
+        Vector3 PlayerVelocity { get; set; }
         void TakeDamage(float damage);
     }
 }
