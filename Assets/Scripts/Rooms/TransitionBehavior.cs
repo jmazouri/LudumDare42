@@ -7,6 +7,7 @@ using UnityEngine;
 
 public abstract class TransitionBehavior : ScriptableObject
 {
+    [Header("A multiplier - 0.5 is half, 2 is double")]
     public float Speed;
 
     [NonSerialized]

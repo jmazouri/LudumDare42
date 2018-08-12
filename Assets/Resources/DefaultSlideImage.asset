@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 864842642c811c64bb5c6ba6dcf66f97, type: 3}
   m_Name: DefaultSlideImage
   m_EditorClassIdentifier: 
-  Speed: 0.5
+  Speed: 0.45
   Curve:
     serializedVersion: 2
     m_Curve:
@@ -29,7 +29,7 @@ MonoBehaviour:
       value: 0.5
       inSlope: 0.5538705
       outSlope: 0.5538705
-      tangentMode: 0
+      tangentMode: 1
       weightedMode: 0
       inWeight: 0.64711833
       outWeight: 0.33333334
@@ -47,7 +47,7 @@ MonoBehaviour:
       value: 0.5
       inSlope: -0.008823979
       outSlope: -0.008823979
-      tangentMode: 0
+      tangentMode: 1
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.7367534
@@ -63,3 +63,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  ImageOverride: {fileID: 0}
