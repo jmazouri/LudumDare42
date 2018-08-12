@@ -18,11 +18,13 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private int _characterLimit;
     [SerializeField] private float _maxReadingTime;
     [SerializeField] private float _timeBetweenCharacters;
+    [SerializeField] private GameObject _pauseMenu;
     private bool _isPrinting;
     private int _characterCount;
     private List<string> _dialogues;
     private float _readingTimePassed;
     private float _characterPrintingTimePassed;
+    private bool _pauseState;
 
     private void Start()
     {
@@ -46,6 +48,22 @@ public class GameUIController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyUp(KeyCode.F10) || Input.GetKeyUp(KeyCode.Escape))
+        {
+            _pauseState = !_pauseState;
+        }
+
+        if (_pauseState && !_pauseMenu.activeInHierarchy)
+        {
+            _pauseMenu.SetActive(true);
+            Time.timeScale = 0f;
+        }
+        else if (!_pauseState && _pauseMenu.activeInHierarchy)
+        {
+            Time.timeScale = 1f;
+            _pauseMenu.SetActive(false);
+        }
+        
         if (_dialogues.Count > 0 && !_dialogueObject.active)
         {
             _dialogueObject.SetActive(true);
@@ -82,6 +100,11 @@ public class GameUIController : MonoBehaviour
         {
             _characterPrintingTimePassed += Time.deltaTime;
         }
+    }
+
+    public void UnpauseGame()
+    {
+        _pauseState = false;
     }
 
     public void AssignNewHealth(float health)
