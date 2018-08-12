@@ -640,11 +640,12 @@ MonoBehaviour:
   _shadowScore: {fileID: 114186187353025644}
   _maxHealth: 100
   _maxAmmo: 1000
-  _demo: 0
+  _demo: 1
   _dialogueObject: {fileID: 1084375680329454}
   _dialogueTextBox: {fileID: 114255686467860990}
   _characterLimit: 121
   _maxReadingTime: 5
+  _timeBetweenCharacters: 0.1
 --- !u!114 &114415548068296064
 MonoBehaviour:
   m_ObjectHideFlags: 1

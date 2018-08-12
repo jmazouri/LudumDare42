@@ -17,9 +17,12 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _dialogueTextBox;
     [SerializeField] private int _characterLimit;
     [SerializeField] private float _maxReadingTime;
-    
+    [SerializeField] private float _timeBetweenCharacters;
+    private bool _isPrinting;
+    private int _characterCount;
     private List<string> _dialogues;
     private float _readingTimePassed;
+    private float _characterPrintingTimePassed;
 
     private void Start()
     {
@@ -52,16 +55,32 @@ public class GameUIController : MonoBehaviour
             _dialogueObject.SetActive(false);
         }
 
-        if (_dialogueObject.activeInHierarchy && (_readingTimePassed >= _maxReadingTime || _dialogueTextBox.text == string.Empty))
+        if (!_isPrinting && _dialogueObject.activeInHierarchy && (_readingTimePassed >= _maxReadingTime || _dialogueTextBox.text == string.Empty))
         {
-            var text = _dialogues[0];
-            _dialogueTextBox.text = text;
-            _dialogues.Remove(text);
+            _characterCount = 0;
+            _isPrinting = true;
+            _dialogueTextBox.text = string.Empty;
             _readingTimePassed = 0f;
         }
-        else if (_dialogueObject.activeInHierarchy)
+        else if (!_isPrinting && _dialogueObject.activeInHierarchy)
         {
             _readingTimePassed += Time.deltaTime;
+        }
+        else if (_characterCount < _dialogues[0].Length && _characterPrintingTimePassed >= _timeBetweenCharacters)
+        {
+            _dialogueTextBox.text += _dialogues[0][_characterCount];
+            _characterCount++;
+            _characterPrintingTimePassed = 0;
+        }
+        else if (_characterCount >= _dialogues[0].Length)
+        {
+            _isPrinting = false;
+            var text = _dialogues[0];
+            _dialogues.Remove(text);
+        }
+        else if (_isPrinting)
+        {
+            _characterPrintingTimePassed += Time.deltaTime;
         }
     }
 

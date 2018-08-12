@@ -272,16 +272,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114255686467860990, guid: 707686bfe13bff9469ea415e9710df27,
-        type: 2}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114255686467860990, guid: 707686bfe13bff9469ea415e9710df27,
-        type: 2}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 114186187353025644, guid: 707686bfe13bff9469ea415e9710df27,
         type: 2}
       propertyPath: m_havePropertiesChanged
@@ -298,6 +288,16 @@ Prefab:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114457175782921264, guid: 707686bfe13bff9469ea415e9710df27,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114255686467860990, guid: 707686bfe13bff9469ea415e9710df27,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114255686467860990, guid: 707686bfe13bff9469ea415e9710df27,
         type: 2}
       propertyPath: m_isInputParsingRequired
       value: 1
