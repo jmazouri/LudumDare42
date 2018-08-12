@@ -135,7 +135,7 @@ Transform:
   m_GameObject: {fileID: 1688858960013258}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0.5133}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4966808595399580}
   - {fileID: 4448171609681090}
@@ -387,7 +387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transitionState: 3
-  IsInitialisingRoom: 1
+  IsInitialisingRoom: 0
   _initialPlayer: {fileID: 0}
   _spawners:
   - {fileID: 114467887060520008}

@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7078c0b73183b224ea8a1cd2bbe3787c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxRooms: 5
+  MaxRooms: 10
   AmountToShrinkBy: 0.1
   StartingRoom: {fileID: 1711195486}
   PreloadedPrefabs: []

@@ -48,8 +48,10 @@ public class RoomGenerator : MonoBehaviour
 
         _activeRoom = StartingRoom;
         InitialGeneration();
-        ShrinkRooms();
+
 	}
+
+    int depth = 0;
 
     private void InitialGeneration()
     {
@@ -57,7 +59,6 @@ public class RoomGenerator : MonoBehaviour
         {
             var exits = _activeRoom.TransitionPoints.Where(d => d.IsViableExit).ToArray();
             
-
             if (exits.Length == 0)
             {
                 Debug.LogError($"No exits found on room \"{_activeRoom.name}\" - stopping generation", _activeRoom.gameObject);
@@ -69,7 +70,10 @@ public class RoomGenerator : MonoBehaviour
             foreach (var exit in exits)
             {
                 exit.LinkedRoom = GenerateNext(thisRoom);
+                depth++;
             }
+
+            depth = 0;
         }
 
         SealRooms();
@@ -106,6 +110,11 @@ public class RoomGenerator : MonoBehaviour
         var instance = Instantiate(prefab, transform, false);
         var roomInstance = instance.GetComponent<Room>();
 
+        if (ReferenceEquals(instance.GetComponent<Shrink>(), null))
+        {
+            instance.AddComponent<Shrink>();
+        }
+
         roomInstance.name = "Room " + (_generatedRooms.Count + 1);
 
         var entrances = roomInstance.TransitionPoints.Where(d => d.IsViableEntrance).ToArray();
@@ -116,8 +125,10 @@ public class RoomGenerator : MonoBehaviour
             return null;
         }
 
+        var wallCollider = instance.GetComponentInChildren<CompositeCollider2D>();
+
         int entranceIndex = Random.Range(0, entrances.Length);
-        instance.transform.position = new Vector3(_activeRoom.transform.position.x + 15, 0, 0);
+        instance.transform.position = new Vector3(_activeRoom.transform.position.x + wallCollider.bounds.size.x + 5, 0, 0);
 
         var chosenEntrance = entrances[entranceIndex];
         chosenEntrance.LinkedRoom = source;
