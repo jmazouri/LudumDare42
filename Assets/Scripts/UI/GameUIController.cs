@@ -128,6 +128,16 @@ public class GameUIController : MonoBehaviour
         _shadowScore.text = result;
     }
 
+    public void AddAmmo(float ammoCount)
+    {
+        AssignNewAmmo(_ammoBar.value + ammoCount);
+    }
+
+    public void AddHealth(float health)
+    {
+        AssignNewHealth(_healthBar.value + health);
+    }
+
     public void QueueNewDialogueText(string text)
     {
         if (text.Length > _characterLimit)

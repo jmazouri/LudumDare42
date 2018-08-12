@@ -14,11 +14,18 @@ namespace LD42.AI.Prototypes
         [SerializeField] private BaseAttackBehaviour _attackBehaviour;
         private Rigidbody2D _rb;
         private IPlayerController _target;
+        private Ammo _ammoBoxPrefab;
+
+        private void SpawnAmmo()
+        {
+            Instantiate(_ammoBoxPrefab, transform.position, transform.rotation);
+        }
 
         // Use this for initialization
         void Start()
         {
             _rb = GetComponent<Rigidbody2D>();
+            _ammoBoxPrefab = Resources.Load<Ammo>("AmmoBox");
         }
 
         void FixedUpdate()
@@ -69,6 +76,7 @@ namespace LD42.AI.Prototypes
             if (!(_health <= 0)) return;
             
             Destroy(gameObject);
+            SpawnAmmo();
         }
     }
 }

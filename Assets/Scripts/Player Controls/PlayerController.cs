@@ -12,10 +12,7 @@ public class PlayerController : CharacterController2D, IPlayerController
 
     private Vector3 _velocity;
     private float _ammo;
-    private GameObject _healthBar;
-    private GameObject _ammoBar;
-    private Slider _ammoBarSlider;
-    private Slider _healthBarSlider;
+    private GameUIController _uiController;
 
     // Movement Config
     [SerializeField] [Range(-25, 25)] private float _gravity = -25f;
@@ -57,14 +54,7 @@ public class PlayerController : CharacterController2D, IPlayerController
 
     void Start()
     {
-        _healthBar = GameObject.Find("HealthBar");
-        _ammoBar = GameObject.Find("AmmoBar");
-
-        _healthBarSlider = _healthBar.GetComponent<Slider>();
-        _ammoBarSlider = _ammoBar.GetComponent<Slider>();
-
-        _healthBarSlider.value = _health;
-        _ammoBarSlider.value = _initialAmmo;
+        _uiController = GameObject.Find("GameHUD").GetComponent<GameUIController>();
         
         _controller = GetComponent<CharacterController2D>();
         PlayerTransform = transform;
