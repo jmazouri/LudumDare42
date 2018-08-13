@@ -314,7 +314,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9d6f35c89a5c38d4e962b7d8a29ada44, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -555,6 +555,7 @@ MonoBehaviour:
   totalVerticalRays: 4
   _controller: {fileID: 114784946375732354}
   _health: 100
+  _velocity: {x: 0, y: 0, z: 0}
   _gravity: -25
   _jumpHeight: 3
   _speed: 8

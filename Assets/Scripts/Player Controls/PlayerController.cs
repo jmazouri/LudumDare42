@@ -94,7 +94,7 @@ public class PlayerController : CharacterController2D, IPlayerController
         }
 
         var horizontalMovement = Input.GetAxis("Horizontal");
-        if (horizontalMovement != 0 && !_runningAudioSource.isPlaying)
+        if (_controller.isGrounded && horizontalMovement != 0 && !_runningAudioSource.isPlaying)
         {
             _runningAudioSource.Play();
         }
