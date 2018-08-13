@@ -28,7 +28,7 @@ public class RoomTransitionPoint : MonoBehaviour
     public bool IsViableExit => TransitionPointMode == TransitionPointMode.Exit;
 
     public bool WasDialogActivated { get; set; } = false;
-    public string EntryDialog { get; set; } = null;
+    public List<string> EntryDialog { get; set; } = new List<string>();
 
     private void Start()
     {

@@ -140,10 +140,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7078c0b73183b224ea8a1cd2bbe3787c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxRooms: 25
+  MaxRooms: 41
   AmountToShrinkBy: 0.1
   StartingRoom: {fileID: 0}
-  PreloadedPrefabs: []
+  DialogRoomPrefab: {fileID: 1636036754662110, guid: 24f55612665653142838adbfefe768cf,
+    type: 2}
 --- !u!4 &229610520
 Transform:
   m_ObjectHideFlags: 0

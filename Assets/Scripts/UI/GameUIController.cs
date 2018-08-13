@@ -10,7 +10,8 @@ public enum UIState
 {
     Paused,
     GameOver,
-    InGame
+    InGame,
+    Dialog
 }
 
 public class GameUIController : MonoBehaviour
@@ -21,6 +22,7 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _shadowScore;
     [SerializeField] private int _maxHealth;
     [SerializeField] private int _maxAmmo;
+
     [SerializeField] private bool _demo;
     [SerializeField] private GameObject _dialogueObject;
     [SerializeField] private TextMeshProUGUI _dialogueTextBox;
@@ -95,12 +97,6 @@ public class GameUIController : MonoBehaviour
 
         if (_dialogues.Count > 0 && !_dialogueObject.active)
         {
-            if (_backgroundAudioSource.clip == _backgroundMusic3) _backgroundAudioSource.clip = _backgroundMusic1;
-            else if (_backgroundAudioSource.clip == _backgroundMusic1) _backgroundAudioSource.clip = _backgroundMusic2;
-            else _backgroundAudioSource.clip = _backgroundMusic3;
-
-            _backgroundAudioSource.Play();
-
             _dialogueObject.SetActive(true);
         }
         else if (_dialogueObject.active && _dialogues.Count == 0 && _readingTimePassed > _maxReadingTime)
@@ -179,6 +175,15 @@ public class GameUIController : MonoBehaviour
 
                 Time.timeScale = 1f;
                 break;
+            case UIState.Dialog:
+                _pauseMenu.SetActive(false);
+                _gameOverMenu.SetActive(false);
+
+                _pauseAudioSource.Play();
+                _backgroundAudioSource.Pause();
+
+                Time.timeScale = 1f;
+                break;
         }
     }
 
@@ -203,6 +208,12 @@ public class GameUIController : MonoBehaviour
         _shadowScore.text = result;
     }
 
+    public void CancelAndClearDialog()
+    {
+        _dialogues.Clear();
+        _readingTimePassed = _maxReadingTime + 1;
+    }
+
     public void QueueNewDialogueText(string text)
     {
         if (text.Length > _characterLimit)
@@ -212,5 +223,14 @@ public class GameUIController : MonoBehaviour
         }
 
         _dialogues.Add(text);
+    }
+
+    public void TriggerMusic()
+    {
+        if (_backgroundAudioSource.clip == _backgroundMusic3) _backgroundAudioSource.clip = _backgroundMusic1;
+        else if (_backgroundAudioSource.clip == _backgroundMusic1) _backgroundAudioSource.clip = _backgroundMusic2;
+        else _backgroundAudioSource.clip = _backgroundMusic3;
+
+        _backgroundAudioSource.Play();
     }
 }

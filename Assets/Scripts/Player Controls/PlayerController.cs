@@ -68,13 +68,13 @@ public class PlayerController : CharacterController2D, IPlayerController
 
     private void OnTriggerEnterEvent(Collider2D col)
     {
-        Debug.Log("onTriggerEnterEvent: " + col.gameObject.name);
+        //Debug.Log("onTriggerEnterEvent: " + col.gameObject.name);
     }
 
 
     private void OnTriggerExitEvent(Collider2D col)
     {
-        Debug.Log("onTriggerExitEvent: " + col.gameObject.name);
+        //Debug.Log("onTriggerExitEvent: " + col.gameObject.name);
     }
 
     void FixedUpdate()
