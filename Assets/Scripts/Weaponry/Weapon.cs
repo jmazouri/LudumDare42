@@ -1,25 +1,45 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using LD42.AI.Prototypes;
+using LD42.PlayerControllers;
 using UnityEngine;
 using UnityEngine.Networking;
 
 [RequireComponent(typeof(AudioSource))]
 public class Weapon : MonoBehaviour 
 {
-	public float FireRate = 0;
-	public float Damage = 10;
+	public float FireRate = 1;
+	public float Damage = 7;
     public float ProjectileDistance = 100;
 	public LayerMask AffectedEntities;
 
 	private float timeToFire = 0;
 	private Transform projectile;
+    private GameUIController _uiController;
+
+    private int _ammo = 100;
+
+    public int Ammo
+    {
+        get
+        {
+            return _ammo;
+        }
+        set
+        {
+            _ammo = value;
+            _uiController.AssignNewAmmo(_ammo, MaxAmmo);
+        }
+    }
+    public int MaxAmmo { get; set; } = 100;
 
     [SerializeField] private AudioSource _audioSource;
 
 	void Awake() 
 	{
 		projectile = transform.Find("Laser");
-	}
+        _uiController = GameObject.Find("GameHUD").GetComponent<GameUIController>();
+    }
 	
 	void Update () 
 	{
@@ -42,7 +62,12 @@ public class Weapon : MonoBehaviour
 
 	void Shoot()
 	{
-		Debug.Log("Test");
+		if (Ammo <= 0)
+        {
+            return;
+        }
+
+        Ammo--;
 
 	    var point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -58,7 +83,19 @@ public class Weapon : MonoBehaviour
 
 	    if (hit.collider != null)
 	    {
-            Debug.Log("Hit " + hit.collider.name);
+	        Debug.Log("Hit " + hit.collider.name);
+
+            var enemy = hit.collider.gameObject.GetComponent<BasicEnemyBehaviour>();
+
+	        if (enemy == null)
+	            return;
+
+            Debug.Log("Got enemy");
+
+            enemy.TakeDamage(Damage);
 	    }
-	}
+
+        _uiController.AssignNewAmmo(Ammo, MaxAmmo);
+
+    }
 }

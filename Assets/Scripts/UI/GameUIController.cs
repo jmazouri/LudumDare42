@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -59,18 +60,19 @@ public class GameUIController : MonoBehaviour
         _dialogues = new List<string>(10);
         _dialogueTextBox.text = string.Empty;
         _dialogueObject.SetActive(false);
-        _healthBar.maxValue = _maxHealth;
-        _ammoBar.maxValue = _maxAmmo;
-        AssignNewHealth(_maxHealth);
-        AssignNewAmmo(_maxAmmo);
+        _healthBar.maxValue = 1;
+        _ammoBar.maxValue = 1;
+
+        AssignNewHealth(100, 100);
+        AssignNewAmmo(1, 1);
 
         TriggerStateChange();
         _backgroundAudioSource.clip = _backgroundMusic1;
 
         if (!_demo) return;
 
-        AssignNewHealth(_maxHealth / 2);
-        AssignNewAmmo(_maxAmmo / 2);
+        AssignNewHealth(50, 100);
+        AssignNewAmmo(5, 10);
         AssignNewScore(5050);
         QueueNewDialogueText("WEW LAD");
         QueueNewDialogueText("ITS WORKING");
@@ -154,31 +156,42 @@ public class GameUIController : MonoBehaviour
             case UIState.Paused:
                 _pauseMenu.SetActive(true);
                 _gameOverMenu.SetActive(false);
+                
+                _pauseAudioSource.Play();
+                _backgroundAudioSource.Pause();
+
                 Time.timeScale = 0f;
                 break;
             case UIState.GameOver:
                 _pauseMenu.SetActive(false);
                 _gameOverMenu.SetActive(true);
+
+                _backgroundAudioSource.Stop();
+
                 Time.timeScale = 0f;
                 break;
             case UIState.InGame:
                 _pauseMenu.SetActive(false);
                 _gameOverMenu.SetActive(false);
+
+                _pauseAudioSource.Stop();
+                _backgroundAudioSource.UnPause();
+
                 Time.timeScale = 1f;
                 break;
         }
     }
 
-    public void AssignNewHealth(float health)
+    public void AssignNewHealth(float health, float maxHealth)
     {
-        var assignValue = Mathf.Clamp(health, 0, _maxHealth);
+        var assignValue = health / maxHealth;
 
         _healthBar.value = assignValue;
     }
 
-    public void AssignNewAmmo(float ammoCount)
+    public void AssignNewAmmo(float ammoCount, float maxAmmo)
     {
-        var assignValue = Mathf.Clamp(ammoCount, 0, _maxAmmo);
+        var assignValue = ammoCount / maxAmmo;
 
         _ammoBar.value = assignValue;
     }
@@ -188,16 +201,6 @@ public class GameUIController : MonoBehaviour
         var result = Mathf.Clamp(score, 0, 9999999999999).ToString("0000000000000");
         _score.text = result;
         _shadowScore.text = result;
-    }
-
-    public void AddAmmo(float ammoCount)
-    {
-        AssignNewAmmo(_ammoBar.value + ammoCount);
-    }
-
-    public void AddHealth(float health)
-    {
-        AssignNewHealth(_healthBar.value + health);
     }
 
     public void QueueNewDialogueText(string text)

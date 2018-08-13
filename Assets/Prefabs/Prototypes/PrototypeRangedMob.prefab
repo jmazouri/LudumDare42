@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114842917246225446}
   - component: {fileID: 58443322798666784}
   - component: {fileID: 114943554802826088}
-  m_Layer: 8
+  m_Layer: 30
   m_Name: PrototypeRangedMob
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,6 +142,7 @@ MonoBehaviour:
   _attackRadius: 5
   _moveSpeed: 5
   _attackBehaviour: {fileID: 114943554802826088}
+  _spriteRenderer: {fileID: 212090525941998574}
   _gravity: -25
   _jumpHeight: 3
   _speed: 2

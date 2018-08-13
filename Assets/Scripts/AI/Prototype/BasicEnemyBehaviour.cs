@@ -13,6 +13,7 @@ namespace LD42.AI.Prototypes
         [SerializeField] private float _attackRadius;
         [SerializeField] private float _moveSpeed;
         [SerializeField] private BaseAttackBehaviour _attackBehaviour;
+        [SerializeField] private SpriteRenderer _spriteRenderer;
         private Rigidbody2D _rb;
         private IPlayerController _target;
         private Ammo _ammoBoxPrefab;
@@ -91,6 +92,8 @@ namespace LD42.AI.Prototypes
             _velocity.y += _gravity * Time.deltaTime;
 
             _controller.move(_velocity * Time.deltaTime);
+
+            _spriteRenderer.flipX = _velocity.x < 0;
 
             _velocity = _controller.velocity;
         }

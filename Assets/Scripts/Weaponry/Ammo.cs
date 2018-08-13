@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Ammo : MonoBehaviour
 {
-    public float AmmoMin;
-    public float AmmoMax;
+    public int AmmoMin;
+    public int AmmoMax;
 
     private Collider2D _collider;
     private GameUIController _uiController;
@@ -19,7 +19,7 @@ public class Ammo : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Player")) return;
-        _uiController.AddAmmo(Random.Range(AmmoMin, AmmoMax));
+        collision.GetComponentInChildren<Weapon>().Ammo += Random.Range(AmmoMin, AmmoMax);
         Debug.Log("Added ammo");
         Destroy(gameObject);
     }
