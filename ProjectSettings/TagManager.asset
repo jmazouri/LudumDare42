@@ -13,7 +13,7 @@ TagManager:
   - UI
   - 
   - 
-  - Enemies
+  - 
   - EnemyProjectiles
   - 
   - 
@@ -35,7 +35,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Enemies
   - Player
   m_SortingLayers:
   - name: Default
