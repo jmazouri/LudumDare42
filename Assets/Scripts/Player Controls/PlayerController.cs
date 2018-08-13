@@ -109,7 +109,7 @@ public class PlayerController : CharacterController2D, IPlayerController
 
         _velocity = _controller.velocity;
 
-        _animator.SetFloat("VelocityMagnitude", (_velocity.x > 0) ? _velocity.x : -_velocity.x);
+        _animator.SetFloat("VelocityMagnitude", (horizontalMovement > 0) ? horizontalMovement : -horizontalMovement);
         _animator.SetBool("IsGrounded", _controller.isGrounded);
     }
 
