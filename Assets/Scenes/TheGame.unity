@@ -1217,6 +1217,65 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1702082534535142, guid: e9a60dc1409643042a826dadd0f6b743,
     type: 2}
   m_PrefabInternal: {fileID: 1112308656}
+--- !u!114 &1837627628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1837627627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f945b17641576cf44b0d04b621a59128, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ignoreOneWayPlatformsThisFrame: 0
+  _skinWidth: 0.02
+  platformMask:
+    serializedVersion: 2
+    m_Bits: 1
+  triggerMask:
+    serializedVersion: 2
+    m_Bits: 131072
+  oneWayPlatformMask:
+    serializedVersion: 2
+    m_Bits: 65536
+  slopeLimit: 30
+  jumpingThreshold: 0.07
+  slopeSpeedMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -90
+      value: 1.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 90
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  totalHorizontalRays: 8
+  totalVerticalRays: 4
 --- !u!4 &1837627637 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4337231607122354, guid: e9a60dc1409643042a826dadd0f6b743,
