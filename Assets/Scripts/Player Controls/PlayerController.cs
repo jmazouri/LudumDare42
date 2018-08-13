@@ -3,6 +3,7 @@ using LD42.PlayerControllers;
 using Prime31;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(AudioSource))]
 public class PlayerController : CharacterController2D, IPlayerController
 {
     private CharacterController2D _controller;
@@ -20,6 +21,10 @@ public class PlayerController : CharacterController2D, IPlayerController
     [SerializeField] private float _speed = 8f;
     [SerializeField] private float _groundDamping = 20f; // how fast do we change direction? higher means faster
     [SerializeField] private float _inAirDamping = 5f;
+
+    // Sound config
+    [SerializeField] private AudioSource _jumpAudioSource;
+    [SerializeField] private AudioSource _runningAudioSource;
 
     public float Health
     {
@@ -94,10 +99,18 @@ public class PlayerController : CharacterController2D, IPlayerController
         if (_controller.isGrounded && Input.GetButton("Jump"))
         {
             _velocity.y = Mathf.Sqrt(2f * _jumpHeight * -_gravity);
+            _jumpAudioSource.Play();
         }
 
+        var horizontalMovement = Input.GetAxis("Horizontal");
+        if (horizontalMovement != 0 && !_runningAudioSource.isPlaying)
+        {
+            _runningAudioSource.Play();
+        }
+        else _runningAudioSource.Stop();
+
         var smoothMovementFactor = _controller.isGrounded ? _groundDamping : _inAirDamping;
-        _velocity.x = Mathf.Lerp(_velocity.x, Input.GetAxis("Horizontal") * _speed, Time.deltaTime * smoothMovementFactor);
+        _velocity.x = Mathf.Lerp(_velocity.x, horizontalMovement * _speed, Time.deltaTime * smoothMovementFactor);
 
         _velocity.y += _gravity * Time.deltaTime;
 

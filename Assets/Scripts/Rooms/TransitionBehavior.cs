@@ -21,7 +21,7 @@ public abstract class TransitionBehavior : ScriptableObject
     public RoomTransitionPoint TransitionPoint;
     [NonSerialized]
     private bool _startTransition;
-
+    
     public GameUIController UIController => FindObjectOfType<GameUIController>();
 
     public RoomTransitionPoint TargetTransitionPoint => 

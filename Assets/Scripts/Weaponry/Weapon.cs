@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+[RequireComponent(typeof(AudioSource))]
 public class Weapon : MonoBehaviour 
 {
 	public float FireRate = 0;
@@ -12,6 +13,8 @@ public class Weapon : MonoBehaviour
 
 	private float timeToFire = 0;
 	private Transform projectile;
+
+    [SerializeField] private AudioSource _audioSource;
 
 	void Awake() 
 	{
@@ -50,6 +53,8 @@ public class Weapon : MonoBehaviour
 	    var hit = Physics2D.Raycast(laserOrigin, mousePosition - laserOrigin, ProjectileDistance, AffectedEntities);
 
         Debug.DrawLine(laserOrigin, (mousePosition - laserOrigin)*100, Color.red);
+
+        _audioSource.Play();
 
 	    if (hit.collider != null)
 	    {

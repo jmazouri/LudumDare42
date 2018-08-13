@@ -19,6 +19,11 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private float _maxReadingTime;
     [SerializeField] private float _timeBetweenCharacters;
     [SerializeField] private GameObject _pauseMenu;
+    [SerializeField] private AudioClip _backgroundMusic1;
+    [SerializeField] private AudioClip _backgroundMusic2;
+    [SerializeField] private AudioClip _backgroundMusic3;
+    [SerializeField] private AudioSource _backgroundAudioSource;
+    [SerializeField] private AudioSource _pauseAudioSource;
     private bool _isPrinting;
     private int _characterCount;
     private List<string> _dialogues;
@@ -35,6 +40,8 @@ public class GameUIController : MonoBehaviour
         _ammoBar.maxValue = _maxAmmo;
         AssignNewHealth(_maxHealth);
         AssignNewAmmo(_maxAmmo);
+
+        _backgroundAudioSource.clip = _backgroundMusic1;
 
         if (!_demo) return;
 
@@ -56,15 +63,28 @@ public class GameUIController : MonoBehaviour
         if (_pauseState && !_pauseMenu.activeInHierarchy)
         {
             _pauseMenu.SetActive(true);
+            _backgroundAudioSource.Pause();
+            _pauseAudioSource.Play();
             Time.timeScale = 0f;
         }
         else if (!_pauseState && _pauseMenu.activeInHierarchy)
         {
             Time.timeScale = 1f;
+            _pauseAudioSource.Stop();
+            _backgroundAudioSource.UnPause();
             _pauseMenu.SetActive(false);
         }
-        
-        if (_dialogues.Count > 0 && !_dialogueObject.active)
+
+        if (!_backgroundAudioSource.isPlaying && !_pauseState)
+        {
+            if (_backgroundAudioSource.clip == _backgroundMusic3) _backgroundAudioSource.clip = _backgroundMusic1;
+            else if (_backgroundAudioSource.clip == _backgroundMusic1) _backgroundAudioSource.clip = _backgroundMusic2;
+            else _backgroundAudioSource.clip = _backgroundMusic3;
+
+            _backgroundAudioSource.Play();
+        }
+
+            if (_dialogues.Count > 0 && !_dialogueObject.active)
         {
             _dialogueObject.SetActive(true);
         }
@@ -100,6 +120,7 @@ public class GameUIController : MonoBehaviour
         {
             _characterPrintingTimePassed += Time.deltaTime;
         }
+
     }
 
     public void UnpauseGame()

@@ -357,23 +357,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1702082534535142, guid: e9a60dc1409643042a826dadd0f6b743,
     type: 2}
   m_PrefabInternal: {fileID: 593049595}
---- !u!114 &593049597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 593049596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e26fd2c8f12d08a4b8ccb21fb5dffa5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FireRate: 0
-  Damage: 10
-  ProjectileDistance: 100
-  AffectedEntities:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!4 &593049602 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4337231607122354, guid: e9a60dc1409643042a826dadd0f6b743,
