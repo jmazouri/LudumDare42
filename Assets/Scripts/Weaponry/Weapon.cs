@@ -13,13 +13,31 @@ public class Weapon : MonoBehaviour
 
 	private float timeToFire = 0;
 	private Transform projectile;
+    private GameUIController _uiController;
+
+    private int _ammo = 100;
+
+    public int Ammo
+    {
+        get
+        {
+            return _ammo;
+        }
+        set
+        {
+            _ammo = value;
+            _uiController.AssignNewAmmo(_ammo, MaxAmmo);
+        }
+    }
+    public int MaxAmmo { get; set; } = 100;
 
     [SerializeField] private AudioSource _audioSource;
 
 	void Awake() 
 	{
 		projectile = transform.Find("Laser");
-	}
+        _uiController = GameObject.Find("GameHUD").GetComponent<GameUIController>();
+    }
 	
 	void Update () 
 	{
@@ -42,7 +60,12 @@ public class Weapon : MonoBehaviour
 
 	void Shoot()
 	{
-		Debug.Log("Test");
+		if (Ammo <= 0)
+        {
+            return;
+        }
+
+        Ammo--;
 
 	    var point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -60,5 +83,8 @@ public class Weapon : MonoBehaviour
 	    {
             Debug.Log("Hit " + hit.collider.name);
 	    }
-	}
+
+        _uiController.AssignNewAmmo(Ammo, MaxAmmo);
+
+    }
 }

@@ -9,10 +9,8 @@ public class PlayerController : CharacterController2D, IPlayerController
     private CharacterController2D _controller;
 
     [SerializeField] private float _health;
-    [SerializeField] private float _initialAmmo;
 
     private Vector3 _velocity;
-    private float _ammo;
     private GameUIController _uiController;
 
     // Movement Config
@@ -40,15 +38,6 @@ public class PlayerController : CharacterController2D, IPlayerController
         }
     }
 
-    public float Ammo
-    {
-        get { return _ammo; }
-        private set
-        {
-            _ammo = value;
-        }
-    }
-
     public Transform PlayerTransform { get; private set; }
     public Rigidbody2D PlayerRigidbody { get; private set; }
     public float MaxVelocityChange { get; set; } = 10.0f;
@@ -56,6 +45,8 @@ public class PlayerController : CharacterController2D, IPlayerController
     public void TakeDamage(float damage)
     {
         Health -= damage;
+
+        _uiController.AssignNewHealth(Health, 100);
     }
 
     void Start()
@@ -69,8 +60,6 @@ public class PlayerController : CharacterController2D, IPlayerController
         _controller.onControllerCollidedEvent += OnControllerCollider;
         _controller.onTriggerEnterEvent += OnTriggerEnterEvent;
         _controller.onTriggerExitEvent += OnTriggerExitEvent;
-        
-        Ammo = _initialAmmo;
     }
 
     private void OnControllerCollider(RaycastHit2D hit)
