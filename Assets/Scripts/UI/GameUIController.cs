@@ -14,6 +14,15 @@ public enum UIState
     Dialog
 }
 
+public enum DartisMood
+{
+    Default,
+    Angry,
+    Love,
+    Report,
+    Thonk
+}
+
 public class GameUIController : MonoBehaviour
 {
     [SerializeField] private Slider _healthBar;
@@ -26,6 +35,7 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private bool _demo;
     [SerializeField] private GameObject _dialogueObject;
     [SerializeField] private TextMeshProUGUI _dialogueTextBox;
+    [SerializeField] private GameObject _dialogImageObject;
     [SerializeField] private int _characterLimit;
     [SerializeField] private float _maxReadingTime;
     [SerializeField] private float _timeBetweenCharacters;
@@ -37,9 +47,17 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private AudioSource _pauseAudioSource;
     [SerializeField] private GameObject _gameOverMenu;
 
+    // Dartis config
+    [SerializeField] private Sprite _default;
+    [SerializeField] private Sprite _angry;
+    [SerializeField] private Sprite _love;
+    [SerializeField] private Sprite _report;
+    [SerializeField] private Sprite _thonk;
+
     private bool _isPrinting;
     private int _characterCount;
-    private List<string> _dialogues;
+    private Dictionary<string, DartisMood> _dialogues;
+    private Image _imageDisplay;
     private float _readingTimePassed;
     private float _characterPrintingTimePassed;
 
@@ -59,7 +77,8 @@ public class GameUIController : MonoBehaviour
 
     private void Start()
     {
-        _dialogues = new List<string>(10);
+        _imageDisplay = _dialogImageObject.GetComponent<Image>();
+        _dialogues = new Dictionary<string, DartisMood>(10);
         _dialogueTextBox.text = string.Empty;
         _dialogueObject.SetActive(false);
         _healthBar.maxValue = 1;
@@ -76,9 +95,9 @@ public class GameUIController : MonoBehaviour
         AssignNewHealth(50, 100);
         AssignNewAmmo(5, 10);
         AssignNewScore(5050);
-        QueueNewDialogueText("WEW LAD");
-        QueueNewDialogueText("ITS WORKING");
-        QueueNewDialogueText("Notice me player-kun.");
+        QueueNewDialogueText("WEW LAD", DartisMood.Default);
+        QueueNewDialogueText("ITS WORKING", DartisMood.Angry);
+        QueueNewDialogueText("Notice me player-kun.", DartisMood.Report);
     }
 
     void Update()
@@ -115,23 +134,44 @@ public class GameUIController : MonoBehaviour
         {
             _readingTimePassed += Time.deltaTime;
         }
-        else if (_dialogues.Count > 0 && _characterCount < _dialogues[0].Length && _characterPrintingTimePassed >= _timeBetweenCharacters)
+        else if (_dialogues.Count > 0 && _characterCount < _dialogues.ElementAt(0).Key.Length && _characterPrintingTimePassed >= _timeBetweenCharacters)
         {
-            _dialogueTextBox.text += _dialogues[0][_characterCount];
+            var dialogue = _dialogues.ElementAt(0);
+            _dialogueTextBox.text += dialogue.Key[_characterCount];
+            _imageDisplay.sprite = GetSprityForMood(dialogue.Value);
             _characterCount++;
             _characterPrintingTimePassed = 0;
         }
-        else if (_dialogues.Count > 0 && _characterCount >= _dialogues[0].Length)
+        else if (_dialogues.Count > 0 && _characterCount >= _dialogues.ElementAt(0).Key.Length)
         {
             _isPrinting = false;
-            var text = _dialogues[0];
-            _dialogues.Remove(text);
+            var text = _dialogues.ElementAt(0);
+            _dialogues.Remove(text.Key);
         }
         else if (_isPrinting)
         {
             _characterPrintingTimePassed += Time.deltaTime;
         }
 
+    }
+
+    private Sprite GetSprityForMood(DartisMood mood)
+    {
+        switch (mood)
+        {
+            case DartisMood.Default:
+                return _default;
+            case DartisMood.Angry:
+                return _angry;
+            case DartisMood.Love:
+                return _love;
+            case DartisMood.Report:
+                return _report;
+            case DartisMood.Thonk:
+                return _thonk;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(mood), mood, null);
+        }
     }
 
     public void RestartGame()
@@ -214,7 +254,7 @@ public class GameUIController : MonoBehaviour
         _readingTimePassed = _maxReadingTime + 1;
     }
 
-    public void QueueNewDialogueText(string text)
+    public void QueueNewDialogueText(string text, DartisMood mood)
     {
         if (text.Length > _characterLimit)
         {
@@ -222,7 +262,7 @@ public class GameUIController : MonoBehaviour
                 "String exceeds the character limit of the Dialogue box. Please split the string and parse them in one at a time.");
         }
 
-        _dialogues.Add(text);
+        _dialogues.Add(text, mood);
     }
 
     public void TriggerMusic()

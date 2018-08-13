@@ -100,7 +100,7 @@ public abstract class TransitionBehavior : ScriptableObject
 
             foreach (var line in TargetTransitionPoint.EntryDialog)
             {
-                UIController.QueueNewDialogueText(line);
+                UIController.QueueNewDialogueText(line.Key, line.Value);
             }
         }
         else if (UIController.UIState != UIState.InGame)

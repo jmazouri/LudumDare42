@@ -369,9 +369,25 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114986453052958014, guid: 707686bfe13bff9469ea415e9710df27,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a3934a46b41cf524797b6f7f86086f55,
+        type: 3}
+    - target: {fileID: 114772247415292330, guid: 707686bfe13bff9469ea415e9710df27,
+        type: 2}
+      propertyPath: _dialogImageObject
+      value: 
+      objectReference: {fileID: 323793044}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 707686bfe13bff9469ea415e9710df27, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &323793044 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1418705985022152, guid: 707686bfe13bff9469ea415e9710df27,
+    type: 2}
+  m_PrefabInternal: {fileID: 323793043}
 --- !u!1 &609368660
 GameObject:
   m_ObjectHideFlags: 0

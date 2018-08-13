@@ -2487,6 +2487,7 @@ MonoBehaviour:
   _demo: 0
   _dialogueObject: {fileID: 1969768540272942}
   _dialogueTextBox: {fileID: 114442046900365470}
+  _dialogImageObject: {fileID: 1375782224544722}
   _characterLimit: 121
   _maxReadingTime: 2
   _timeBetweenCharacters: 0.033
@@ -2497,6 +2498,11 @@ MonoBehaviour:
   _backgroundAudioSource: {fileID: 82959301872095086}
   _pauseAudioSource: {fileID: 82613544599530594}
   _gameOverMenu: {fileID: 1015077479103860}
+  _default: {fileID: 21300000, guid: a3934a46b41cf524797b6f7f86086f55, type: 3}
+  _angry: {fileID: 21300000, guid: ca526a9ec27605d42901addf8da38bec, type: 3}
+  _love: {fileID: 21300000, guid: b12589d7e3c766544ba7cce6b5bfd751, type: 3}
+  _report: {fileID: 21300000, guid: 64fe24c4d2303ab4b8a47732b92db6e8, type: 3}
+  _thonk: {fileID: 21300000, guid: c0e1ee7f921786c4499510a9307aef82, type: 3}
   _uiState: 2
 --- !u!114 &114789000261276758
 MonoBehaviour:
