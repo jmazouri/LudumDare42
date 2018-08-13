@@ -76,9 +76,9 @@ public static class AllTheDialogue
         {
             { "...W-w-well, here we are. Happy, are we?", DartisMood.Default },
             { "Y-y-y-you got what you came for. Pervert.", DartisMood.Default },
-            { "... … …", DartisMood.Default },
-            { "... … …", DartisMood.Default },
-            { "... … …", DartisMood.Default },
+            { "...  … …", DartisMood.Default },
+            { "...   … …", DartisMood.Default },
+            { "...    … …", DartisMood.Default },
             { "...D-do you...like me?", DartisMood.Love },
             { "...W-why else would you come all this way and not do anything...funny...to me?", DartisMood.Love },
             { "Y-you MUST like me too!", DartisMood.Love },
@@ -93,8 +93,8 @@ public static class AllTheDialogue
             { "....I-I totally don’t regret trying to kill you though. You were being very rude!", DartisMood.Angry },
             { "...I-if I let you t-t-t-touch my control console, c-c-can we pretend this never happened and stay like this?", DartisMood.Love },
             { "I want to fly with someone as brave as you...S-stupid, but brave…", DartisMood.Love },
-            { "... … …", DartisMood.Default },
-            { "... … …", DartisMood.Default },
+            { "...     … …", DartisMood.Default },
+            { "...      … …", DartisMood.Default },
             { "I-I-I’ll take your s-silence as a yes. D-dummy.", DartisMood.Love }
         }
     };
