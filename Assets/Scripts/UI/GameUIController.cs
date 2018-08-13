@@ -2,7 +2,15 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
+public enum UIState
+{
+    Paused,
+    GameOver,
+    InGame
+}
 
 public class GameUIController : MonoBehaviour
 {
@@ -19,17 +27,31 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private float _maxReadingTime;
     [SerializeField] private float _timeBetweenCharacters;
     [SerializeField] private GameObject _pauseMenu;
+    [SerializeField] private AudioClip _backgroundMusic3;
     [SerializeField] private AudioClip _backgroundMusic1;
     [SerializeField] private AudioClip _backgroundMusic2;
-    [SerializeField] private AudioClip _backgroundMusic3;
     [SerializeField] private AudioSource _backgroundAudioSource;
     [SerializeField] private AudioSource _pauseAudioSource;
+    [SerializeField] private GameObject _gameOverMenu;
     private bool _isPrinting;
     private int _characterCount;
     private List<string> _dialogues;
     private float _readingTimePassed;
     private float _characterPrintingTimePassed;
-    private bool _pauseState;
+
+    [SerializeField] private UIState _uiState;
+    public UIState UIState
+    {
+        get
+        {
+            return _uiState;
+        }
+        set
+        {
+            _uiState = value;
+            TriggerStateChange();
+        }
+    }
 
     private void Start()
     {
@@ -41,6 +63,7 @@ public class GameUIController : MonoBehaviour
         AssignNewHealth(_maxHealth);
         AssignNewAmmo(_maxAmmo);
 
+        TriggerStateChange();
         _backgroundAudioSource.clip = _backgroundMusic1;
 
         if (!_demo) return;
@@ -57,25 +80,17 @@ public class GameUIController : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.F10) || Input.GetKeyUp(KeyCode.Escape))
         {
-            _pauseState = !_pauseState;
+            if (UIState == UIState.InGame)
+            {
+                UIState = UIState.Paused;
+            }
+            else if (UIState == UIState.Paused)
+            {
+                UIState = UIState.InGame;
+            }
         }
-
-        if (_pauseState && !_pauseMenu.activeInHierarchy)
-        {
-            _pauseMenu.SetActive(true);
-            _backgroundAudioSource.Pause();
-            _pauseAudioSource.Play();
-            Time.timeScale = 0f;
-        }
-        else if (!_pauseState && _pauseMenu.activeInHierarchy)
-        {
-            Time.timeScale = 1f;
-            _pauseAudioSource.Stop();
-            _backgroundAudioSource.UnPause();
-            _pauseMenu.SetActive(false);
-        }
-
-        if (!_backgroundAudioSource.isPlaying && !_pauseState)
+        
+        if (_dialogues.Count > 0 && !_dialogueObject.active)
         {
             if (_backgroundAudioSource.clip == _backgroundMusic3) _backgroundAudioSource.clip = _backgroundMusic1;
             else if (_backgroundAudioSource.clip == _backgroundMusic1) _backgroundAudioSource.clip = _backgroundMusic2;
@@ -123,9 +138,37 @@ public class GameUIController : MonoBehaviour
 
     }
 
+    public void RestartGame()
+    {
+        UIState = UIState.InGame;
+        SceneManager.LoadScene("TheGame");
+    }
+
     public void UnpauseGame()
     {
-        _pauseState = false;
+        UIState = UIState.InGame;
+    }
+
+    public void TriggerStateChange()
+    {
+        switch (UIState)
+        {
+            case UIState.Paused:
+                _pauseMenu.SetActive(true);
+                _gameOverMenu.SetActive(false);
+                Time.timeScale = 0f;
+                break;
+            case UIState.GameOver:
+                _pauseMenu.SetActive(false);
+                _gameOverMenu.SetActive(true);
+                Time.timeScale = 0f;
+                break;
+            case UIState.InGame:
+                _pauseMenu.SetActive(false);
+                _gameOverMenu.SetActive(false);
+                Time.timeScale = 1f;
+                break;
+        }
     }
 
     public void AssignNewHealth(float health)

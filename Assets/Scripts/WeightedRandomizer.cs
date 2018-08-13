@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 public class WeightedRandomizer<T>
 {
-    private static Random _random = new Random();
     public Dictionary<T, int> Weights;
 
     /// <summary>
@@ -48,7 +47,7 @@ public class WeightedRandomizer<T>
         }
 
         // Randomizes a number from Zero to Sum
-        int roll = _random.Next(0, sum);
+        int roll = Random.Range(0, sum);
 
         // Finds chosen item based on spawn rate
         T selected = sortedSpawnRate[sortedSpawnRate.Count - 1].Key;
