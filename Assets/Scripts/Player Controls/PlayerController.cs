@@ -23,6 +23,7 @@ public class PlayerController : CharacterController2D, IPlayerController
     // Sound config
     [SerializeField] private AudioSource _jumpAudioSource;
     [SerializeField] private AudioSource _runningAudioSource;
+    [SerializeField] private Animator _animator;
 
     public float Health
     {
@@ -106,6 +107,8 @@ public class PlayerController : CharacterController2D, IPlayerController
         _controller.move(_velocity * Time.deltaTime);
 
         _velocity = _controller.velocity;
+        _animator.SetFloat("VelocityMagnitude", _velocity.magnitude > 0 ? _velocity.magnitude : -_velocity.magnitude);
+        _animator.SetBool("IsGrounded", _controller.isGrounded);
     }
 
     public void ClearVelocityAndInput()
