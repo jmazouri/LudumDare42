@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemySpawnerBehaviour : MonoBehaviour
 {
     [SerializeField] private GameObject _enemyPrefab;
-    [SerializeField] private int _amountOfEnemiesToSpawn;
+    [SerializeField] public int _amountOfEnemiesToSpawn;
     [SerializeField] private float _cooldownBetweenSpawns;
     [SerializeField] private bool _shouldSpawn;
     private float _timeSinceLastSpawn;

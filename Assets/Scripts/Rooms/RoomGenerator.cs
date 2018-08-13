@@ -142,6 +142,14 @@ public class RoomGenerator : MonoBehaviour
 
         roomInstance.name = "Room " + (_generatedRooms.Count + 1);
 
+        if (roomInstance._spawners.Length > 0)
+        {
+            foreach (var spawner in roomInstance._spawners)
+            {
+                spawner._amountOfEnemiesToSpawn = Mathf.RoundToInt(_linearRoomCount / 3) + 1;
+            }
+        }
+
         var entrances = roomInstance.TransitionPoints.Where(d => d.IsViableEntrance).ToArray();
 
         if (entrances.Length == 0)

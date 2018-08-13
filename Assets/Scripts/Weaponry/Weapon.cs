@@ -13,7 +13,7 @@ public class Weapon : MonoBehaviour
     public float ProjectileDistance = 100;
 	public LayerMask AffectedEntities;
 
-	private float timeToFire = 0;
+	private float coolDown;
 	private Transform projectile;
     private GameUIController _uiController;
 
@@ -45,20 +45,20 @@ public class Weapon : MonoBehaviour
 	{
 	    if (Input.GetButtonDown("Fire1"))
 	    {
-	        if (FireRate <= 0)
+	        if (coolDown <= 0)
 	        {
 	            Shoot();
-	        }
-	        else
-	        {
-	            if (Time.time > timeToFire)
-	            {
-	                timeToFire = Time.time + 1 / FireRate;
-	                Shoot();
-	            }
+                coolDown = FireRate;
 	        }
         }
-	}
+
+        if (coolDown > 0)
+        {
+            coolDown -= Time.deltaTime;
+        }
+    }
+
+    LTDescr shootTween;
 
 	void Shoot()
 	{
@@ -75,7 +75,24 @@ public class Weapon : MonoBehaviour
 
         var laserOrigin = new Vector2(projectile.position.x, projectile.position.y);
 
-	    var hit = Physics2D.Raycast(laserOrigin, mousePosition - laserOrigin, ProjectileDistance, AffectedEntities);
+        var hit = Physics2D.Linecast(projectile.position, new Vector3(point.x, point.y, projectile.transform.position.z), AffectedEntities);
+
+        var line = projectile.GetComponent<LineRenderer>();
+        line.SetPosition(0, projectile.transform.position);
+        line.SetPosition(1, new Vector3(point.x, point.y, projectile.transform.position.z));
+
+        if (shootTween != null)
+        {
+            shootTween.setPassed(0.5f);
+        }
+
+        shootTween = LeanTween.value(projectile.gameObject,
+        update =>
+        {
+            line.endColor = new Color(line.endColor.r, line.endColor.g, line.endColor.b, update);
+            line.startColor = new Color(line.startColor.r, line.startColor.g, line.startColor.b, update);
+        }, 1, 0, 0.5f)
+        .setEase(LeanTweenType.easeInCirc);
 
         Debug.DrawLine(laserOrigin, (mousePosition - laserOrigin)*100, Color.red);
 
