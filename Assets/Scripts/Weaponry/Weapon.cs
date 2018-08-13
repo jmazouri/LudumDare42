@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using LD42.AI.Prototypes;
+using LD42.PlayerControllers;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -7,7 +9,7 @@ using UnityEngine.Networking;
 public class Weapon : MonoBehaviour 
 {
 	public float FireRate = 0;
-	public float Damage = 10;
+	public float Damage = 7;
     public float ProjectileDistance = 100;
 	public LayerMask AffectedEntities;
 
@@ -58,7 +60,16 @@ public class Weapon : MonoBehaviour
 
 	    if (hit.collider != null)
 	    {
-            Debug.Log("Hit " + hit.collider.name);
+	        Debug.Log("Hit " + hit.collider.name);
+
+            var enemy = hit.collider.gameObject.GetComponent<BasicEnemyBehaviour>();
+
+	        if (enemy == null)
+	            return;
+
+            Debug.Log("Got enemy");
+
+            enemy.TakeDamage(Damage);
 	    }
 	}
 }
