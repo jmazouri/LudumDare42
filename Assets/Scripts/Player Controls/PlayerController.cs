@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(AudioSource))]
 public class PlayerController : CharacterController2D, IPlayerController
 {
-    private CharacterController2D _controller;
+    [SerializeField] private CharacterController2D _controller;
 
     [SerializeField] private float _health;
 
@@ -52,8 +52,7 @@ public class PlayerController : CharacterController2D, IPlayerController
     void Start()
     {
         _uiController = GameObject.Find("GameHUD").GetComponent<GameUIController>();
-        
-        _controller = GetComponent<CharacterController2D>();
+       
         PlayerTransform = transform;
         PlayerRigidbody = GetComponent<Rigidbody2D>();
 
