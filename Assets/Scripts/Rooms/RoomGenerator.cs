@@ -11,23 +11,22 @@ public class RoomGenerator : MonoBehaviour
     public float AmountToShrinkBy;
 
     public Room StartingRoom;
-    public Room[] PreloadedPrefabs;
+    public GameObject DialogRoomPrefab;
 
     private List<Room> _roomPrefabs = new List<Room>();
     private List<Room> _generatedRooms = new List<Room>();
+
+    private GameUIController _gameUI;
     private Room _activeRoom;
     private float _initialShrinkAmount = 0;
+
+    private int _linearRoomCount;
 
     private WeightedRandomizer<Room> _weights = new WeightedRandomizer<Room>();
 
 	// Use this for initialization
 	void Start ()
     {
-        if (PreloadedPrefabs != null)
-        {
-            _roomPrefabs.AddRange(PreloadedPrefabs);
-        }
-
         _roomPrefabs.AddRange(Resources.LoadAll<Room>("RoomPrefabs"));
 
         if (_roomPrefabs.Count == 0)
@@ -49,6 +48,8 @@ public class RoomGenerator : MonoBehaviour
         }
 
         _activeRoom = StartingRoom;
+        _gameUI = FindObjectOfType<GameUIController>();
+
         InitialGeneration();
         ShrinkRooms();
 	}
@@ -97,10 +98,24 @@ public class RoomGenerator : MonoBehaviour
 	
     private GameObject GetNextPrefab()
     {
-        var picked = _weights.TakeOne();
-        _weights.Weights[picked] = Mathf.RoundToInt(_weights.Weights[picked] * 0.8f);
+        if (AllTheDialogue.Options.ContainsKey(_linearRoomCount))
+        {
+            var dialogRoom = Instantiate(DialogRoomPrefab, transform, false).GetComponent<Room>();
 
-        return picked.gameObject;
+            var entrance = dialogRoom.TransitionPoints.First(d => d.IsViableEntrance);
+            entrance.EntryDialog = AllTheDialogue.Options[_linearRoomCount];
+
+            _linearRoomCount++;
+            return dialogRoom.gameObject;
+        }
+        else
+        {
+            var picked = _weights.TakeOne();
+            _weights.Weights[picked] = Mathf.RoundToInt(_weights.Weights[picked] * 0.8f);
+
+            _linearRoomCount++;
+            return Instantiate(picked, transform, false).gameObject;
+        }
     }
 
     private void ShrinkRooms()
@@ -116,9 +131,8 @@ public class RoomGenerator : MonoBehaviour
 
     public Room GenerateNext(Room source)
     {
-        var prefab = GetNextPrefab();
+        var instance = GetNextPrefab();
 
-        var instance = Instantiate(prefab, transform, false);
         var roomInstance = instance.GetComponent<Room>();
 
         if (ReferenceEquals(instance.GetComponent<Shrink>(), null))
@@ -132,7 +146,7 @@ public class RoomGenerator : MonoBehaviour
 
         if (entrances.Length == 0)
         {
-            Debug.LogError($"Chosen room prefab {prefab.name} has no viable entrances.", prefab);
+            Debug.LogError($"Chosen room prefab {instance.name} has no viable entrances.", instance);
             return null;
         }
 
@@ -144,7 +158,6 @@ public class RoomGenerator : MonoBehaviour
         var chosenEntrance = entrances[entranceIndex];
         chosenEntrance.LinkedRoom = source;
         chosenEntrance.PlayerCanUse = true;
-        chosenEntrance.EntryDialog = "What the FUCKing SHIT?!";
 
         _activeRoom = instance.GetComponent<Room>();
         _generatedRooms.Add(_activeRoom);

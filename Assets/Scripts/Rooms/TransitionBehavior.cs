@@ -34,6 +34,8 @@ public abstract class TransitionBehavior : ScriptableObject
         ToRoom = toRoom;
         TransitionPoint = transitionPoint;
 
+        UIController.CancelAndClearDialog();
+
         LeanTween.value(FromRoom.gameObject, update =>
         {
             Time.timeScale = update;
@@ -42,6 +44,8 @@ public abstract class TransitionBehavior : ScriptableObject
         .setEase(LeanTweenType.easeOutExpo)
         .setIgnoreTimeScale(true)
         .setOnComplete(() => _startTransition = true);
+
+        
     }
 
     public virtual void MoveCamera()
@@ -83,10 +87,25 @@ public abstract class TransitionBehavior : ScriptableObject
         Time.fixedDeltaTime = 0.02f;
         _startTransition = false;
 
-        if (TargetTransitionPoint.EntryDialog != null && !TargetTransitionPoint.WasDialogActivated)
+        if (ToRoom._spawners.Length > 0)
         {
+            UIController.TriggerMusic();
+        }
+
+        if (TargetTransitionPoint.EntryDialog.Count > 0 && !TargetTransitionPoint.WasDialogActivated)
+        {
+            UIController.UIState = UIState.Dialog;
+
             TargetTransitionPoint.WasDialogActivated = true;
-            UIController.QueueNewDialogueText(TargetTransitionPoint.EntryDialog);
+
+            foreach (var line in TargetTransitionPoint.EntryDialog)
+            {
+                UIController.QueueNewDialogueText(line);
+            }
+        }
+        else if (UIController.UIState != UIState.InGame)
+        {
+            UIController.UIState = UIState.InGame;
         }
     }
 

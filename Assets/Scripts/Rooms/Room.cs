@@ -21,7 +21,7 @@ public class Room : MonoBehaviour
     public bool IsInitialisingRoom;
 
     [SerializeField] private GameObject _initialPlayer;
-    [SerializeField] private EnemySpawnerBehaviour[] _spawners;
+    [SerializeField] public EnemySpawnerBehaviour[] _spawners;
 
     public IPlayerController PlayerController { get; set; }
 
@@ -32,6 +32,8 @@ public class Room : MonoBehaviour
     void Start()
     {
         if (!IsInitialisingRoom) return;
+
+        _spawners = GetComponentsInChildren<EnemySpawnerBehaviour>();
 
         PlayerController = _initialPlayer.GetComponent<IPlayerController>();
         Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, Camera.main.transform.position.z);
