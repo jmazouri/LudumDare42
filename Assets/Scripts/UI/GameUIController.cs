@@ -90,7 +90,7 @@ public class GameUIController : MonoBehaviour
                 UIState = UIState.InGame;
             }
         }
-        
+
         if (_dialogues.Count > 0 && !_dialogueObject.active)
         {
             if (_backgroundAudioSource.clip == _backgroundMusic3) _backgroundAudioSource.clip = _backgroundMusic1;
@@ -98,10 +98,7 @@ public class GameUIController : MonoBehaviour
             else _backgroundAudioSource.clip = _backgroundMusic3;
 
             _backgroundAudioSource.Play();
-        }
 
-            if (_dialogues.Count > 0 && !_dialogueObject.active)
-        {
             _dialogueObject.SetActive(true);
         }
         else if (_dialogueObject.active && _dialogues.Count == 0 && _readingTimePassed > _maxReadingTime)

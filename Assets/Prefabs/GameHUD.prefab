@@ -2497,7 +2497,7 @@ MonoBehaviour:
   _backgroundAudioSource: {fileID: 82959301872095086}
   _pauseAudioSource: {fileID: 82613544599530594}
   _gameOverMenu: {fileID: 1015077479103860}
-  _uiState: 0
+  _uiState: 2
 --- !u!114 &114789000261276758
 MonoBehaviour:
   m_ObjectHideFlags: 1
