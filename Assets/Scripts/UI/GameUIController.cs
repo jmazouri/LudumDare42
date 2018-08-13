@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -154,16 +155,27 @@ public class GameUIController : MonoBehaviour
             case UIState.Paused:
                 _pauseMenu.SetActive(true);
                 _gameOverMenu.SetActive(false);
+                
+                _pauseAudioSource.Play();
+                _backgroundAudioSource.Pause();
+
                 Time.timeScale = 0f;
                 break;
             case UIState.GameOver:
                 _pauseMenu.SetActive(false);
                 _gameOverMenu.SetActive(true);
+
+                _backgroundAudioSource.Stop();
+
                 Time.timeScale = 0f;
                 break;
             case UIState.InGame:
                 _pauseMenu.SetActive(false);
                 _gameOverMenu.SetActive(false);
+
+                _pauseAudioSource.Stop();
+                _backgroundAudioSource.UnPause();
+
                 Time.timeScale = 1f;
                 break;
         }
