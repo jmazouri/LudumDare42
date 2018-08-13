@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Dynamic;
+using UnityEngine;
 using LD42.PlayerControllers;
 using Prime31;
 using UnityEngine.UI;
@@ -10,7 +11,7 @@ public class PlayerController : CharacterController2D, IPlayerController
 
     [SerializeField] private float _health;
 
-    private Vector3 _velocity;
+    [SerializeField] private Vector3 _velocity;
     private GameUIController _uiController;
 
     // Movement Config
@@ -107,7 +108,8 @@ public class PlayerController : CharacterController2D, IPlayerController
         _controller.move(_velocity * Time.deltaTime);
 
         _velocity = _controller.velocity;
-        _animator.SetFloat("VelocityMagnitude", _velocity.magnitude > 0 ? _velocity.magnitude : -_velocity.magnitude);
+
+        _animator.SetFloat("VelocityMagnitude", _velocity.x);
         _animator.SetBool("IsGrounded", _controller.isGrounded);
     }
 
