@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using LD42.PlayerControllers;
+using Prime31;
 using UnityEngine;
 
 namespace LD42.AI.Prototypes
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class BasicEnemyBehaviour : MonoBehaviour
+    public class BasicEnemyBehaviour : CharacterController2D
     {
         [SerializeField] private float _health;
         [SerializeField] private float _attackRadius;
@@ -15,6 +16,16 @@ namespace LD42.AI.Prototypes
         private Rigidbody2D _rb;
         private IPlayerController _target;
         private Ammo _ammoBoxPrefab;
+
+        private CharacterController2D _controller;
+        private Vector3 _velocity;
+
+        // Movement config
+        [SerializeField] [Range(-25, 25)] private float _gravity = -25f;
+        [SerializeField] [Range(0, 20)] private float _jumpHeight = 3f;
+        [SerializeField] private float _speed = 2f;
+        [SerializeField] private float _groundDamping = 20f; // how fast do we change direction? higher means faster
+        [SerializeField] private float _inAirDamping = 5f;
 
         private void SpawnAmmo()
         {
@@ -25,6 +36,7 @@ namespace LD42.AI.Prototypes
         void Start()
         {
             _rb = GetComponent<Rigidbody2D>();
+            _controller = GetComponent<CharacterController2D>();
             _ammoBoxPrefab = Resources.Load<Ammo>("AmmoBox");
         }
 
@@ -59,15 +71,28 @@ namespace LD42.AI.Prototypes
 
         protected virtual void HandleMove(GameObject playerObj)
         {
-                if (playerObj.transform.position.x < transform.position.x && _rb.velocity.x > - _moveSpeed)
-                {
-                    _rb.AddForce(Vector2.left * _moveSpeed);
-                }
-                else if (playerObj.transform.position.x > transform.position.x && _rb.velocity.x < _moveSpeed)
-                {
-                    _rb.AddForce(Vector2.right * _moveSpeed);
-                }
+            float leftOrRight = 0;
+
+            if (playerObj.transform.position.x < transform.position.x)
+            {
+                leftOrRight = -1;
+            }
+            else if (playerObj.transform.position.x > transform.position.x)
+            {
+                leftOrRight = 1;
+            }
             
+            if (_controller.isGrounded)
+                _velocity.y = 0;
+
+            var smoothMovementFactor = _controller.isGrounded ? _groundDamping : _inAirDamping;
+            _velocity.x = Mathf.Lerp(_velocity.x, leftOrRight * _speed, Time.deltaTime * smoothMovementFactor);
+
+            _velocity.y += _gravity * Time.deltaTime;
+
+            _controller.move(_velocity * Time.deltaTime);
+
+            _velocity = _controller.velocity;
         }
 
         public virtual void TakeDamage(float damage)
