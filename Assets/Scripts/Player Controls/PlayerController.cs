@@ -13,6 +13,7 @@ public class PlayerController : CharacterController2D, IPlayerController
 
     [SerializeField] private Vector3 _velocity;
     private GameUIController _uiController;
+    private SpriteRenderer _sprite;
 
     // Movement Config
     [SerializeField] [Range(-25, 25)] private float _gravity = -25f;
@@ -61,6 +62,8 @@ public class PlayerController : CharacterController2D, IPlayerController
         _controller.onControllerCollidedEvent += OnControllerCollider;
         _controller.onTriggerEnterEvent += OnTriggerEnterEvent;
         _controller.onTriggerExitEvent += OnTriggerExitEvent;
+
+        _sprite = GetComponent<SpriteRenderer>();
     }
 
     private void OnControllerCollider(RaycastHit2D hit)
@@ -107,9 +110,11 @@ public class PlayerController : CharacterController2D, IPlayerController
 
         _controller.move(_velocity * Time.deltaTime);
 
+        _sprite.flipX = _controller.velocity.x < 0;
+
         _velocity = _controller.velocity;
 
-        _animator.SetFloat("VelocityMagnitude", (horizontalMovement > 0) ? horizontalMovement : -horizontalMovement);
+        _animator.SetFloat("VelocityMagnitude", Mathf.Abs(_velocity.x));
         _animator.SetBool("IsGrounded", _controller.isGrounded);
     }
 
