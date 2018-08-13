@@ -28,6 +28,10 @@ public class Weapon : MonoBehaviour
         set
         {
             _ammo = value;
+	        if (_ammo > MaxAmmo)
+	        {
+		        _ammo = MaxAmmo;
+	        }
             _uiController.AssignNewAmmo(_ammo, MaxAmmo);
         }
     }

@@ -57,7 +57,7 @@ public class GameUIController : MonoBehaviour
     private bool _isPrinting;
     private int _characterCount;
     private Dictionary<string, DartisMood> _dialogues;
-    private Image _imageDisplay;
+    [SerializeField] private Image _imageDisplay;
     private float _readingTimePassed;
     private float _characterPrintingTimePassed;
 
@@ -79,7 +79,6 @@ public class GameUIController : MonoBehaviour
 
     private void Start()
     {
-        _imageDisplay = _dialogImageObject.GetComponent<Image>();
         _dialogues = new Dictionary<string, DartisMood>(10);
         _dialogueTextBox.text = string.Empty;
         _dialogueObject.SetActive(false);

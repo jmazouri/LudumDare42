@@ -153,7 +153,8 @@ public class RoomGenerator : MonoBehaviour
         {
             foreach (var spawner in roomInstance._spawners)
             {
-                spawner._amountOfEnemiesToSpawn = Mathf.RoundToInt(_linearRoomCount / 3) + 1;
+                spawner._amountOfEnemiesToSpawn = Mathf.RoundToInt(_linearRoomCount * 3) + 1;
+                spawner._cooldownBetweenSpawns = 0.05f;
             }
         }
 
