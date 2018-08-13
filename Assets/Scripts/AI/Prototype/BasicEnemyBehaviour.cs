@@ -100,8 +100,12 @@ namespace LD42.AI.Prototypes
             _health -= damage;
             if (!(_health <= 0)) return;
             
+            var number = Random.Range(0, 101);
+            if (number >= 51)
+            {
+                SpawnAmmo();
+            }
             Destroy(gameObject);
-            SpawnAmmo();
         }
     }
 }

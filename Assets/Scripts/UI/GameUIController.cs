@@ -24,6 +24,7 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private AudioClip _backgroundMusic3;
     [SerializeField] private AudioSource _backgroundAudioSource;
     [SerializeField] private AudioSource _pauseAudioSource;
+    [SerializeField] private GameObject _gameOverObject;
     private bool _isPrinting;
     private int _characterCount;
     private List<string> _dialogues;

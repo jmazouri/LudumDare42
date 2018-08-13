@@ -272,16 +272,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114255686467860990, guid: 707686bfe13bff9469ea415e9710df27,
-        type: 2}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114255686467860990, guid: 707686bfe13bff9469ea415e9710df27,
-        type: 2}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 114831641488675720, guid: 707686bfe13bff9469ea415e9710df27,
         type: 2}
       propertyPath: m_havePropertiesChanged
@@ -302,16 +292,6 @@ Prefab:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114020761317991608, guid: 707686bfe13bff9469ea415e9710df27,
-        type: 2}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114020761317991608, guid: 707686bfe13bff9469ea415e9710df27,
-        type: 2}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 114464370996908638, guid: 707686bfe13bff9469ea415e9710df27,
         type: 2}
       propertyPath: m_havePropertiesChanged
@@ -322,12 +302,12 @@ Prefab:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114567860354043566, guid: 707686bfe13bff9469ea415e9710df27,
+    - target: {fileID: 114020761317991608, guid: 707686bfe13bff9469ea415e9710df27,
         type: 2}
       propertyPath: m_havePropertiesChanged
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114567860354043566, guid: 707686bfe13bff9469ea415e9710df27,
+    - target: {fileID: 114020761317991608, guid: 707686bfe13bff9469ea415e9710df27,
         type: 2}
       propertyPath: m_isInputParsingRequired
       value: 1
@@ -341,6 +321,15 @@ Prefab:
         type: 2}
       propertyPath: m_isInputParsingRequired
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224928668532763384, guid: 707686bfe13bff9469ea415e9710df27,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.000061035156
+      objectReference: {fileID: 0}
+    - target: {fileID: 1593779373132684, guid: 707686bfe13bff9469ea415e9710df27, type: 2}
+      propertyPath: m_Name
+      value: Retry Button
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 707686bfe13bff9469ea415e9710df27, type: 2}
