@@ -1084,6 +1084,16 @@ Prefab:
       propertyPath: Loop
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114771920138605766, guid: e9a60dc1409643042a826dadd0f6b743,
+        type: 2}
+      propertyPath: FireRate
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114771920138605766, guid: e9a60dc1409643042a826dadd0f6b743,
+        type: 2}
+      propertyPath: AffectedEntities.m_Bits
+      value: 1073741824
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9a60dc1409643042a826dadd0f6b743, type: 2}
   m_IsPrefabAsset: 0

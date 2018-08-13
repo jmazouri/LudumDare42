@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 [RequireComponent(typeof(AudioSource))]
 public class Weapon : MonoBehaviour 
 {
-	public float FireRate = 0;
+	public float FireRate = 1;
 	public float Damage = 7;
     public float ProjectileDistance = 100;
 	public LayerMask AffectedEntities;

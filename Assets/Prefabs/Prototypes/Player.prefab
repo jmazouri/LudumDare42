@@ -28,6 +28,7 @@ GameObject:
   - component: {fileID: 114771920138605766}
   - component: {fileID: 82515414267368484}
   - component: {fileID: 82949613335331670}
+  - component: {fileID: 95146947735283048}
   m_Layer: 31
   m_Name: Player
   m_TagString: Player
@@ -410,6 +411,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &95146947735283048
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1702082534535142}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114771920138605766
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -488,7 +507,6 @@ MonoBehaviour:
   totalHorizontalRays: 8
   totalVerticalRays: 4
   _health: 100
-  _initialAmmo: 0
   _gravity: -25
   _jumpHeight: 3
   _speed: 8
