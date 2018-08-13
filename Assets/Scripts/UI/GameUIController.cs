@@ -61,6 +61,8 @@ public class GameUIController : MonoBehaviour
     private float _readingTimePassed;
     private float _characterPrintingTimePassed;
 
+    private int _scoreCount;
+
     [SerializeField] private UIState _uiState;
     public UIState UIState
     {
@@ -241,9 +243,16 @@ public class GameUIController : MonoBehaviour
         _ammoBar.value = assignValue;
     }
 
+    public void IncreaseScore(int amount)
+    {
+        AssignNewScore(_scoreCount + amount);
+    }
+
     public void AssignNewScore(int score)
     {
-        var result = Mathf.Clamp(score, 0, 9999999999999).ToString("0000000000000");
+        _scoreCount = score;
+
+        var result = Mathf.Clamp(_scoreCount, 0, 9999999999999).ToString("0000000000000");
         _score.text = result;
         _shadowScore.text = result;
     }

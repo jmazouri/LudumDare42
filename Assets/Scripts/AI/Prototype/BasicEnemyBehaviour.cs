@@ -108,6 +108,8 @@ namespace LD42.AI.Prototypes
             {
                 SpawnAmmo();
             }
+
+            FindObjectOfType<GameUIController>().IncreaseScore(100);
             Destroy(gameObject);
         }
     }
