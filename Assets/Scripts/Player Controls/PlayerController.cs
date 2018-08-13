@@ -35,6 +35,7 @@ public class PlayerController : CharacterController2D, IPlayerController
             if (_health <= 0)
             {
                 Destroy(gameObject);
+                _uiController.UIState = UIState.GameOver;
             }
         }
     }
@@ -59,7 +60,7 @@ public class PlayerController : CharacterController2D, IPlayerController
 
     void Start()
     {
-        //_uiController = GameObject.Find("GameHUD").GetComponent<GameUIController>();
+        _uiController = GameObject.Find("GameHUD").GetComponent<GameUIController>();
         
         _controller = GetComponent<CharacterController2D>();
         PlayerTransform = transform;
