@@ -16,7 +16,7 @@ public class RoomGenerator : MonoBehaviour
     private List<Room> _roomPrefabs = new List<Room>();
     private List<Room> _generatedRooms = new List<Room>();
     private Room _activeRoom;
-    private float _initialShrinkAmount = 1f;
+    private float _initialShrinkAmount = 0;
 
     private WeightedRandomizer<Room> _weights = new WeightedRandomizer<Room>();
 
@@ -50,6 +50,7 @@ public class RoomGenerator : MonoBehaviour
 
         _activeRoom = StartingRoom;
         InitialGeneration();
+        ShrinkRooms();
 	}
 
     int depth = 0;
