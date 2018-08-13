@@ -360,8 +360,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefab: {fileID: 1442428428643932, guid: 1f30c2d96694ecc4dbfc27f093592981,
     type: 2}
-  _amountOfEnemiesToSpawn: 2
-  _cooldownBetweenSpawns: 1
+  _amountOfEnemiesToSpawn: 200
+  _cooldownBetweenSpawns: 0.1
   _shouldSpawn: 1
 --- !u!114 &114767537578146986
 MonoBehaviour:
