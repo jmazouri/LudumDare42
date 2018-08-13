@@ -31,8 +31,16 @@ public class RoomTransitionPoint : MonoBehaviour
     public bool WasDialogActivated { get; set; } = false;
     public Dictionary<string, DartisMood> EntryDialog { get; set; } = new Dictionary<string, DartisMood>();
 
+    private static GameObject _tpPrefab;
+    private SpriteRenderer _tpSprite;
+
     private void Start()
     {
+        if (_tpPrefab == null)
+        {
+            _tpPrefab = (GameObject)Resources.Load("Teleporter");
+        }
+
         _collider = GetComponent<Collider2D>();
         ParentRoom = transform.GetComponentInParent<Room>();
 
@@ -51,7 +59,20 @@ public class RoomTransitionPoint : MonoBehaviour
         {
             Debug.LogWarning($"Transition point \"{name}\" was marked as player usable but has no Collider2D, so nothing will happen.", gameObject);
         }
+
+        if (GetComponent<SpriteRenderer>() == null)
+        {
+            var obj = Instantiate(_tpPrefab, transform, true);
+            obj.transform.position = transform.position;
+            obj.transform.localScale = _collider.bounds.size * 0.66f;
+
+            _tpSprite = obj.GetComponent<SpriteRenderer>();
+        }
     }
+
+    private bool EnemiesDead =>
+        ParentRoom._spawners.Length == 0 ||
+        !ParentRoom._spawners.SelectMany(d => d.Enemies).Any(d => d != null);
 
     private void Update()
     {
@@ -59,6 +80,18 @@ public class RoomTransitionPoint : MonoBehaviour
         {
             CooldownTime  -= Time.deltaTime;
         }
+
+        if (!EnemiesDead)
+        {
+            _tpSprite.color = new Color(1, 0.25f, 0.25f, 1);
+            _tpSprite.GetComponent<Animator>().speed = 0;
+        }
+        else
+        {
+            _tpSprite.color = new Color(1, 1, 1, 1);
+            _tpSprite.GetComponent<Animator>().speed = 1;
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -66,7 +99,7 @@ public class RoomTransitionPoint : MonoBehaviour
         if (!collision.CompareTag("Player")) return;
         if (OnCooldown) return;
 
-        if (ParentRoom._spawners.SelectMany(d=>d.Enemies).Any(d=>d != null))
+        if (!EnemiesDead)
         {
             Debug.Log("Player was denied entry to transition because not all enemies are dead");
             return;
