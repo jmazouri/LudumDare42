@@ -260,6 +260,58 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28578ba1dd0313840b63914186cb767a, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1001 &1019786216
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4978084887816768, guid: eef132e3496d837458187ad9a610fcb2, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -19.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 4978084887816768, guid: eef132e3496d837458187ad9a610fcb2, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4978084887816768, guid: eef132e3496d837458187ad9a610fcb2, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4978084887816768, guid: eef132e3496d837458187ad9a610fcb2, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4978084887816768, guid: eef132e3496d837458187ad9a610fcb2, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4978084887816768, guid: eef132e3496d837458187ad9a610fcb2, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4978084887816768, guid: eef132e3496d837458187ad9a610fcb2, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4978084887816768, guid: eef132e3496d837458187ad9a610fcb2, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114130592681884926, guid: eef132e3496d837458187ad9a610fcb2,
+        type: 2}
+      propertyPath: _initialPlayer
+      value: 
+      objectReference: {fileID: 425325568}
+    - target: {fileID: 114275063123232530, guid: eef132e3496d837458187ad9a610fcb2,
+        type: 2}
+      propertyPath: LinkedRoom
+      value: 
+      objectReference: {fileID: 1610085181}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eef132e3496d837458187ad9a610fcb2, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!114 &1610085181 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114214515177511654, guid: 0c1a1eb22489c7149b814fe8ee0ae2be,
