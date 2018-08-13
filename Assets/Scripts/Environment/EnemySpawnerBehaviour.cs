@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using LD42.AI.Prototypes;
 using UnityEngine;
 
 public class EnemySpawnerBehaviour : MonoBehaviour
@@ -9,6 +10,8 @@ public class EnemySpawnerBehaviour : MonoBehaviour
     [SerializeField] private float _cooldownBetweenSpawns;
     [SerializeField] private bool _shouldSpawn;
     private float _timeSinceLastSpawn;
+
+    public List<BasicEnemyBehaviour> Enemies { get; set; } = new List<BasicEnemyBehaviour>();
 
     public bool ShouldSpawn
     {
@@ -29,7 +32,10 @@ public class EnemySpawnerBehaviour : MonoBehaviour
 
         if (_timeSinceLastSpawn >= _cooldownBetweenSpawns)
         {
-            Instantiate(_enemyPrefab, transform.position, transform.rotation);
+            var enemy = Instantiate(_enemyPrefab, transform.position, transform.rotation);
+
+            Enemies.Add(enemy.GetComponent<BasicEnemyBehaviour>());
+
             _timeSinceLastSpawn = 0f;
             _amountOfEnemiesToSpawn--;
         }

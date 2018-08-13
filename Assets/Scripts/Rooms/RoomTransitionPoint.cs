@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum TransitionPointMode
@@ -64,6 +65,12 @@ public class RoomTransitionPoint : MonoBehaviour
     {
         if (!collision.CompareTag("Player")) return;
         if (OnCooldown) return;
+
+        if (ParentRoom._spawners.SelectMany(d=>d.Enemies).Any(d=>d != null))
+        {
+            Debug.Log("Player was denied entry to transition because not all enemies are dead");
+            return;
+        }
 
         if (!PlayerCanUse)
         {

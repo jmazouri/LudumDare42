@@ -114,7 +114,14 @@ public class RoomGenerator : MonoBehaviour
             _weights.Weights[picked] = Mathf.RoundToInt(_weights.Weights[picked] * 0.8f);
 
             _linearRoomCount++;
-            return Instantiate(picked, transform, false).gameObject;
+            var ins = Instantiate(picked, transform, false);
+
+            foreach (var spawner in ins._spawners)
+            {
+                spawner.ShouldSpawn = false;
+            }
+
+            return ins.gameObject;
         }
     }
 

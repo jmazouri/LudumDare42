@@ -90,6 +90,11 @@ public abstract class TransitionBehavior : ScriptableObject
         if (ToRoom._spawners.Length > 0)
         {
             UIController.TriggerMusic();
+
+            foreach (var spawner in ToRoom._spawners)
+            {
+                spawner.ShouldSpawn = true;
+            }
         }
 
         if (TargetTransitionPoint.EntryDialog.Count > 0 && !TargetTransitionPoint.WasDialogActivated)
