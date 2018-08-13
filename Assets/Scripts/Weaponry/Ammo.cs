@@ -8,12 +8,10 @@ public class Ammo : MonoBehaviour
     public int AmmoMax;
 
     private Collider2D _collider;
-    private GameUIController _uiController;
 
     private void Start()
     {
         _collider = GetComponent<Collider2D>();
-        _uiController = GameObject.Find("GameHUD").GetComponent<GameUIController>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
