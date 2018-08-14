@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using LD42.AI.Prototypes;
 using LD42.PlayerControllers;
 using UnityEngine;
@@ -79,7 +80,7 @@ public class Weapon : MonoBehaviour
 
         var laserOrigin = new Vector2(projectile.position.x, projectile.position.y);
 
-        var hit = Physics2D.Linecast(projectile.position, new Vector3(point.x, point.y, projectile.transform.position.z), AffectedEntities);
+        var hits = Physics2D.LinecastAll(projectile.position, new Vector3(point.x, point.y, projectile.transform.position.z), AffectedEntities);
 
         var line = projectile.GetComponent<LineRenderer>();
         line.SetPosition(0, projectile.transform.position);
@@ -102,19 +103,32 @@ public class Weapon : MonoBehaviour
 
         _audioSource.Play();
 
-	    if (hit.collider != null)
-	    {
-	        Debug.Log("Hit " + hit.collider.name);
+        if (hits.Length > 0)
+        {
+            var firstHit = hits[0];
+            if (firstHit.collider != null)
+            {
+                Debug.Log("Hit " + firstHit.collider.name);
 
-            var enemy = hit.collider.gameObject.GetComponent<BasicEnemyBehaviour>();
+                var enemy = firstHit.collider.gameObject.GetComponent<BasicEnemyBehaviour>();
 
-	        if (enemy == null)
-	            return;
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(Damage);
+                }
+            }
 
-            Debug.Log("Got enemy");
+            foreach (var hit in hits.Skip(1))
+            {
+                var phys = hit.collider?.GetComponent<Rigidbody2D>();
 
-            enemy.TakeDamage(Damage);
-	    }
+                if (phys != null)
+                {
+                    phys.AddForce((mousePosition - laserOrigin), ForceMode2D.Impulse);
+                    hit.collider.GetComponent<BasicEnemyBehaviour>().TakeDamage(0);
+                }
+            }
+        }
 
         _uiController.AssignNewAmmo(Ammo, MaxAmmo);
 

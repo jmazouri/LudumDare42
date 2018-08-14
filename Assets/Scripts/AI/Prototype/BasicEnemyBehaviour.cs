@@ -101,6 +101,12 @@ namespace LD42.AI.Prototypes
         public virtual void TakeDamage(float damage)
         {
             _health -= damage;
+
+            LeanTween.value(gameObject, update =>
+            {
+                _spriteRenderer.color = update;
+            }, Color.red, Color.white, 0.2f);
+
             if (!(_health <= 0)) return;
             
             var number = Random.Range(0, 101);
