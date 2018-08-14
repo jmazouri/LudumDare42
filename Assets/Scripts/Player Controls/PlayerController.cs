@@ -38,6 +38,10 @@ public class PlayerController : CharacterController2D, IPlayerController
                 Destroy(gameObject);
                 _uiController.UIState = UIState.GameOver;
             }
+            else if (_health > 100)
+            {
+                _health = 100;
+            }
         }
     }
 
@@ -49,6 +53,12 @@ public class PlayerController : CharacterController2D, IPlayerController
     {
         Health -= damage;
 
+        _uiController.AssignNewHealth(Health, 100);
+    }
+
+    public void Heal(float healAmount)
+    {
+        Health += healAmount;
         _uiController.AssignNewHealth(Health, 100);
     }
 

@@ -17,6 +17,7 @@ namespace LD42.AI.Prototypes
         private Rigidbody2D _rb;
         private IPlayerController _target;
         private Ammo _ammoBoxPrefab;
+        [SerializeField] private HealthBehaviour _healthPrefab;
 
         private CharacterController2D _controller;
         private Vector3 _velocity;
@@ -110,13 +111,22 @@ namespace LD42.AI.Prototypes
             if (!(_health <= 0)) return;
             
             var number = Random.Range(0, 101);
-            if (number >= 51)
+            if (number < 33)
             {
                 SpawnAmmo();
+            }
+            else if (number < 66)
+            {
+                SpawnHealth();
             }
 
             FindObjectOfType<GameUIController>().IncreaseScore(100);
             Destroy(gameObject);
+        }
+
+        private void SpawnHealth()
+        {
+            Instantiate(_healthPrefab, transform.position, transform.rotation);
         }
     }
 }
