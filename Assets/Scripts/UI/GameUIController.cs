@@ -329,14 +329,23 @@ public class GameUIController : MonoBehaviour
     private int _musicIndex = 0;
     public void TriggerMusic()
     {
-        _backgroundAudioSource.clip = _backgroundMusic[_musicIndex];
-        _musicIndex++;
-
-        if (_musicIndex > _backgroundMusic.Length - 1)
+        if (_backgroundAudioSource.clip == null || 
+            _backgroundAudioSource.time >= _backgroundAudioSource.clip.length)
         {
-            _musicIndex = 0;
+            _musicIndex++;
+
+            if (_musicIndex > _backgroundMusic.Length - 1)
+            {
+                _musicIndex = 0;
+            }
+
+            _backgroundAudioSource.clip = _backgroundMusic[_musicIndex];
+            _backgroundAudioSource.Play();
         }
 
-        _backgroundAudioSource.Play();
+        if (!_backgroundAudioSource.isPlaying)
+        {
+            _backgroundAudioSource.UnPause();
+        }
     }
 }
