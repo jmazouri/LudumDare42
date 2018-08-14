@@ -69,6 +69,11 @@ namespace LD42.AI.Prototypes
             }
 
             _target = null;
+
+            if (transform.position.y < -50)
+            {
+                TakeDamage(99999999999999);
+            }
         }
 
         protected virtual void HandleMove(GameObject playerObj)

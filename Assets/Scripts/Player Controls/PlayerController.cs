@@ -35,7 +35,10 @@ public class PlayerController : CharacterController2D, IPlayerController
             _health = value;
             if (_health <= 0)
             {
-                Destroy(gameObject);
+                if (gameObject != null)
+                {
+                    Destroy(gameObject);
+                }
                 _uiController.UIState = UIState.GameOver;
             }
             else if (_health > 100)

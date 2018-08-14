@@ -70,4 +70,15 @@ public class Room : MonoBehaviour
             enemySpawnerBehaviour.ShouldSpawn = true;
         }
     }
+
+    public void TeleportPlayerHere()
+    {
+        var found = FindObjectOfType<PlayerController>();
+        PlayerController = found;
+
+        TransitionPoints[0].CooldownTime = 3;
+        found.transform.position = TransitionPoints[0].transform.position;
+
+        Camera.main.transform.position = transform.position - new Vector3(0, 0, 10);
+    }
 }
