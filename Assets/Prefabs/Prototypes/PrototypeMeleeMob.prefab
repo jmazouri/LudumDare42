@@ -175,6 +175,8 @@ MonoBehaviour:
   _moveSpeed: 5
   _attackBehaviour: {fileID: 114242870027465934}
   _spriteRenderer: {fileID: 212741226091779278}
+  _healthPrefab: {fileID: 114806345561990224, guid: 8fd827bad13d96a4d8fb1646fadee78b,
+    type: 2}
   _gravity: -25
   _jumpHeight: 3
   _speed: 2
