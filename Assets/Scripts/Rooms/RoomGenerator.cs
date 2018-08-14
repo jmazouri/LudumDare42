@@ -94,6 +94,11 @@ public class RoomGenerator : MonoBehaviour
         {
             unlinked.PlayerCanUse = false;
         }
+        
+        foreach (var trans in _generatedRooms.Last().TransitionPoints.Where(d=>d.IsViableExit))
+        {
+            Destroy(trans.gameObject);
+        }
     }
 	
     private GameObject GetNextPrefab()

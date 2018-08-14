@@ -59,7 +59,7 @@ public abstract class TransitionBehavior : ScriptableObject
 
     public virtual void TeleportPlayer()
     {
-        var playerController = FromRoom.PlayerController;
+        var playerController = (FromRoom.PlayerController == null ? FindObjectOfType<PlayerController>() : FromRoom.PlayerController);
 
         if (playerController == null)
         {
