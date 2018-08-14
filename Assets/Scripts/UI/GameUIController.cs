@@ -163,7 +163,9 @@ public class GameUIController : MonoBehaviour
                 _dialogAudioSource.pitch = UnityEngine.Random.Range(0.9f, 1.2f);
             }
 
-            
+            LeanTween.value(_imageDisplay.gameObject, update => _imageDisplay.rectTransform.localScale = update,
+                new Vector2(1.1f, 1.1f), new Vector2(1.25f, 1.25f), 0.1f);
+
             _dialogAudioSource.Play();
 
             _imageDisplay.sprite = GetSprityForMood(dialogue.Value);
