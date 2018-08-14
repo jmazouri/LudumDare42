@@ -10,11 +10,11 @@ public static class AllTheDialogue
 
     public static Dictionary<int, Dictionary<string, DartisMood>> Options = new Dictionary<int, Dictionary<string, DartisMood>>
     {
-        [1] = new Dictionary<string, DartisMood>
+        [0] = new Dictionary<string, DartisMood>
         {
             { "W... Who are you??? How did you board me?? Go away!", DartisMood.Report }
         },
-        [3] = new Dictionary<string, DartisMood>
+        [2] = new Dictionary<string, DartisMood>
         {
             { "I said go. Away. Don't you know it's RUDE to disturb a lady?!", DartisMood.Angry }
         },
