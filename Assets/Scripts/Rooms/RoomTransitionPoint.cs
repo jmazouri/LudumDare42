@@ -81,7 +81,7 @@ public class RoomTransitionPoint : MonoBehaviour
             CooldownTime  -= Time.deltaTime;
         }
 
-        if (!EnemiesDead)
+        if (!EnemiesDead || OnCooldown)
         {
             _tpSprite.color = new Color(1, 0.25f, 0.25f, 1);
             _tpSprite.GetComponent<Animator>().speed = 0;

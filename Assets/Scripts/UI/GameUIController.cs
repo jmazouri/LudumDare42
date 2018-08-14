@@ -40,12 +40,12 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private float _maxReadingTime;
     [SerializeField] private float _timeBetweenCharacters;
     [SerializeField] private GameObject _pauseMenu;
-    [SerializeField] private AudioClip _backgroundMusic3;
-    [SerializeField] private AudioClip _backgroundMusic1;
-    [SerializeField] private AudioClip _backgroundMusic2;
+    [SerializeField] private AudioClip[] _backgroundMusic;
     [SerializeField] private AudioSource _backgroundAudioSource;
     [SerializeField] private AudioSource _pauseAudioSource;
+    [SerializeField] private AudioSource _dialogAudioSource;
     [SerializeField] private GameObject _gameOverMenu;
+    [SerializeField] private Image _dialogueIndicator;
 
     // Dartis config
     [SerializeField] private Sprite _default;
@@ -89,7 +89,6 @@ public class GameUIController : MonoBehaviour
         AssignNewAmmo(1, 1);
 
         TriggerStateChange();
-        _backgroundAudioSource.clip = _backgroundMusic1;
 
         if (!_demo) return;
 
@@ -115,13 +114,26 @@ public class GameUIController : MonoBehaviour
             }
         }
 
-        if (_dialogues.Count > 0 && !_dialogueObject.active)
+        var rect = _dialogueObject.GetComponent<RectTransform>();
+
+        if (_dialogues.Count > 0 && !_dialogueObject.activeSelf)
         {
             _dialogueObject.SetActive(true);
+
+            LeanTween.value(_dialogueObject, update =>
+            {
+                rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, update);
+            }, -100, 30, 0.66f)
+            .setEase(LeanTweenType.easeOutBack);
         }
-        else if (_dialogueObject.active && _dialogues.Count == 0 && _readingTimePassed > _maxReadingTime)
+        else if (_dialogues.Count == 0 && _readingTimePassed > _maxReadingTime && _dialogueObject.activeSelf)
         {
-            _dialogueObject.SetActive(false);
+            LeanTween.value(_dialogueObject, update =>
+            {
+                rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, update);
+            }, 30, -100, 0.66f)
+            .setEase(LeanTweenType.easeInBack)
+            .setOnComplete(() => _dialogueObject.SetActive(false));            
         }
 
         if (!_isPrinting && _dialogueObject.activeInHierarchy && (_readingTimePassed >= _maxReadingTime || _dialogueTextBox.text == string.Empty))
@@ -139,9 +151,26 @@ public class GameUIController : MonoBehaviour
         {
             var dialogue = _dialogues.ElementAt(0);
             _dialogueTextBox.text += dialogue.Key[_characterCount];
+
+            if (IsPunctuation(dialogue.Key, _characterCount))
+            {
+                _characterPrintingTimePassed -= 0.5f;
+                _dialogAudioSource.pitch = UnityEngine.Random.Range(1f, 1.5f);
+            }
+            else
+            {
+                _characterPrintingTimePassed = 0;
+                _dialogAudioSource.pitch = UnityEngine.Random.Range(0.9f, 1.2f);
+            }
+
+            
+            _dialogAudioSource.Play();
+
             _imageDisplay.sprite = GetSprityForMood(dialogue.Value);
             _characterCount++;
-            _characterPrintingTimePassed = 0;
+
+            _dialogueIndicator.rectTransform.anchoredPosition =
+                new Vector2(0, 27 - (27 * ((float)_characterCount / _dialogues.ElementAt(0).Key.Length)));
         }
         else if (_dialogues.Count > 0 && _characterCount >= _dialogues.ElementAt(0).Key.Length)
         {
@@ -154,6 +183,22 @@ public class GameUIController : MonoBehaviour
             _characterPrintingTimePassed += Time.deltaTime;
         }
 
+    }
+
+    private bool IsPunctuation(string input, int index)
+    {
+        char c = input[index];
+
+        bool isPunc = c == '!' || c == '.' || c == '?';
+
+        if (index < input.Length - 1)
+        {
+            return isPunc && input[index + 1] == ' ';
+        }
+        else
+        {
+            return isPunc;
+        }
     }
 
     private Sprite GetSprityForMood(DartisMood mood)
@@ -258,8 +303,14 @@ public class GameUIController : MonoBehaviour
 
     public void CancelAndClearDialog()
     {
+        if (_dialogues.Any())
+        {
+            _characterCount = _dialogues.ElementAt(0).Key.Length + 1;
+        }
+
         _dialogues.Clear();
         _readingTimePassed = _maxReadingTime + 1;
+        _isPrinting = false;
     }
 
     public void QueueNewDialogueText(string text, DartisMood mood)
@@ -273,11 +324,16 @@ public class GameUIController : MonoBehaviour
         _dialogues.Add(text, mood);
     }
 
+    private int _musicIndex = 0;
     public void TriggerMusic()
     {
-        if (_backgroundAudioSource.clip == _backgroundMusic3) _backgroundAudioSource.clip = _backgroundMusic1;
-        else if (_backgroundAudioSource.clip == _backgroundMusic1) _backgroundAudioSource.clip = _backgroundMusic2;
-        else _backgroundAudioSource.clip = _backgroundMusic3;
+        _backgroundAudioSource.clip = _backgroundMusic[_musicIndex];
+        _musicIndex++;
+
+        if (_musicIndex > _backgroundMusic.Length - 1)
+        {
+            _musicIndex = 0;
+        }
 
         _backgroundAudioSource.Play();
     }

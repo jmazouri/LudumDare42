@@ -202,8 +202,8 @@ namespace Prime31
             for (var i = 0; i < 32; i++)
             {
                 // see if our triggerMask contains this layer and if not ignore it
-                if ((triggerMask.value & 1 << i) == 0)
-                    Physics2D.IgnoreLayerCollision(gameObject.layer, i);
+                //if ((triggerMask.value & 1 << i) == 0)
+                    //Physics2D.IgnoreLayerCollision(gameObject.layer, i);
             }
         }
 

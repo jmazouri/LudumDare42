@@ -73,7 +73,7 @@ public abstract class TransitionBehavior : ScriptableObject
             return;
         }
 
-        TargetTransitionPoint.CooldownTime = 2.5f;
+        TargetTransitionPoint.CooldownTime = 1.5f;
 
         playerController.PlayerTransform.position = TargetTransitionPoint.transform.position;
         playerController.ClearVelocityAndInput();

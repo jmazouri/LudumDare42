@@ -224,6 +224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _controlsMenu: {fileID: 1851120175}
   _mainMenu: {fileID: 943495303}
+  _heart: {fileID: 1130956552}
 --- !u!1 &97986538
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,6 +992,7 @@ GameObject:
   - component: {fileID: 1111745953}
   - component: {fileID: 1111745952}
   - component: {fileID: 1111745951}
+  - component: {fileID: 1111745954}
   m_Layer: 5
   m_Name: Start Button
   m_TagString: Untagged
@@ -1107,6 +1109,18 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1111745949}
   m_CullTransparentMesh: 0
+--- !u!114 &1111745954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1111745949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 399ca04e8a5ef654db31eb1e044620f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _menuUI: {fileID: 80338335}
 --- !u!1 &1114656415
 GameObject:
   m_ObjectHideFlags: 0
